@@ -17,6 +17,7 @@ function App() {
         >
           Learn React
         </a>
+        <h1>Dig Dug</h1>
       </header>
     </div>
   );
