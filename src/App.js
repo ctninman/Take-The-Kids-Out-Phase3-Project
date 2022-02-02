@@ -18,6 +18,7 @@ function App() {
           Learn React
         </a>
         <h1>Dig Dug</h1>
+        <h2>Greatest Video Game of All-Time?</h2>
       </header>
     </div>
   );
