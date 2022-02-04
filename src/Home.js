@@ -1,6 +1,9 @@
 import CityCard from "./CityCard"
+import {useHistory} from "react-router-dom"
 
 function Home ({cities, selectedCity, setSelectedCity, setLogin, userName, setUserName, setPassword, enterUserName}) {
+
+  let history = useHistory()
 
   function handleLoginType (event) {
     setLogin(event.target.value)
@@ -10,11 +13,14 @@ function Home ({cities, selectedCity, setSelectedCity, setLogin, userName, setUs
     setPassword(event.target.value)
   }
 
+  function beginAccountCreate () {
+    history.push('/user/create')
+  }
+
   return(
     <div>
       <h1>Home</h1>
       <div style={{display: 'flex', flexDirection: 'row', alignItems: 'flex-start'}}>
-
         <form 
         onSubmit={enterUserName}
         id='username-form'>
@@ -41,6 +47,17 @@ function Home ({cities, selectedCity, setSelectedCity, setLogin, userName, setUs
             Enter
           </button>
         </form>
+      </div>
+      <div>
+      <button
+          type='button'
+          value="create_account"
+          style={{marginTop: '2px'}} 
+          id='create-account-button'
+          text='Enter'
+          onClick={beginAccountCreate}>
+            Create Account
+          </button>
       </div>
       <h1>Select a city:</h1>
       {cities.map ((city) => (

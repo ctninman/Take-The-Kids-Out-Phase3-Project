@@ -17,6 +17,7 @@ import OutdoorActivities from './OutdoorActivities'
 import PreschoolActivities from './PreschoolActivities'
 import SchoolAgeActivities from './SchoolAgeActivities'
 import ToddlerActivities from './ToddlerActivities'
+import CreateUser from './CreateUser'
 import CityCard from './CityCard'
 
 function App() {
@@ -89,6 +90,9 @@ function App() {
           <Switch>
             <Route exact path='/user'>
               <Login currentUser={currentUser}/>
+            </Route>
+            <Route exact path='/user/create'>
+              <CreateUser />
             </Route>
             <Route exact path='/city'>
               <Cities selectedCity={selectedCity}/>

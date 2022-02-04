@@ -3,7 +3,6 @@ import {useState} from 'react'
 function AddActivity ({selectedCity}) {
 
   const [formActivityName, setFormActivityName] = useState(null)
-  const [formActivityArray, setFormActivityArray] = useState([])
   const [formDescription, setFormDescription] = useState(null)
   const [formOutdoor, setFormOutdoor] = useState(false)
   const [formIndoor, setFormIndoor] = useState(false)
@@ -16,10 +15,6 @@ function AddActivity ({selectedCity}) {
   function onActivityNameChange (event) {
     setFormActivityName(event.target.value)
   }
-
-  // function onActivityArrayChange (event) {
-  //   setFormActivityArray(event.target.value)
-  // }
 
   function onDescriptionChange (event) {
     setFormDescription(event.target.value)
@@ -83,16 +78,11 @@ function AddActivity ({selectedCity}) {
     postNewActivity(newActivity)
   }
 
-
-
-  // function createActivity () {
-
-  // }
-
   return(
     <div>
       <h1>Add Activity to {selectedCity.city_name}</h1>
       <form 
+        style={{display: 'flex', flexDirection:'column', backgroundColor: 'orange', margin: '10px', padding: '20px'}}
         id='activity-form'
         onSubmit={handleSubmit}>
         <input 
@@ -101,14 +91,13 @@ function AddActivity ({selectedCity}) {
           placeholder='Activity'
           onChange={onActivityNameChange}>
         </input>
-        <button type='button'>+ Add another activity
-        </button>
         <input 
           name='description'
           type='text' 
           placeholder='Description'
           onChange={onDescriptionChange}>
         </input>
+        <div>
         <label>Type of Activity?</label>
         <select name={'types'} id={'types'} onChange={onTypeChange}>
           <option value={null}>---</option>
@@ -117,7 +106,13 @@ function AddActivity ({selectedCity}) {
           <option value={'Museum'}>Museum</option>
           <option value={'Store'}>Store</option>
           <option value={'Class'}>Class</option>
+          <option value={'Art'}>Art</option>
+          <option value={'Music'}>Music</option>
+          <option value={'Dance'}>Dance</option>
+          <option value={'Library'}>Library</option>
+          <option value={'Sport'}>Sport</option>
         </select>
+        </div>
         <label>
         <input
           type="checkbox"
