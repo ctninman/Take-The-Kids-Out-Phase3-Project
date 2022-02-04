@@ -1,6 +1,6 @@
-function UpdateUser () {
+function UpdateUser ({currentUser}) {
   return(
-    <h1>UpdateUser</h1>
+    <h1>Update {currentUser.user_name}'s Info</h1>
   )
 }
 

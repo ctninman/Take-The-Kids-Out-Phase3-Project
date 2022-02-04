@@ -1,6 +1,16 @@
-function PlacesToVisit () {
+import UserActivityCard from './UserActivityCard'
+
+function PlacesToVisit ({currentUser, userReviews}) {
+  
+  let wantsToVisit = userReviews.filter((review) => review.want_to_visit === true)
+
   return(
-    <h1>PlacesToVisit</h1>
+    <div>
+      <h1>{currentUser.user_name} Want to Visit:</h1>
+      {wantsToVisit.map((userFavorite) => (
+       <UserActivityCard userFavorite={userFavorite}/>
+     ))}
+    </div>
   )
 }
 

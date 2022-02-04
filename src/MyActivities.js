@@ -1,7 +1,16 @@
-function MyActivities () {
+import UserActivityCard from './UserActivityCard'
+
+function MyActivities ({currentUser, userReviews}) {
+  
   return(
-    <h1>MyActivities</h1>
+    <div>
+      <h1>{currentUser.user_name} Has Been To:</h1>
+      {userReviews.map((userFavorite) => (
+       <UserActivityCard userFavorite={userFavorite}/>
+     ))}
+    </div>
   )
 }
 
 export default MyActivities
+

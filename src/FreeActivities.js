@@ -1,6 +1,18 @@
-function FreeActivities () {
+import ActivityCard from './ActivityCard'
+import {useEffect} from 'react'
+
+function FreeActivities ({selectedCity, locations}) {
+
+  const freeLocations = locations.filter ((location) => location.city_id === selectedCity.id && location.free === true);
+
+
   return(
-    <h1>FreeActivities</h1>
+    <div>
+      <h1>Free Activities in {selectedCity.city_name}</h1>
+      {freeLocations.map((location) => (
+       <ActivityCard location={location}/>
+     ))}
+    </div>
   )
 }
 
