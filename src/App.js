@@ -111,46 +111,46 @@ function App() {
                 />
             </Route>
             <Route exact path='/user/activities' >
-              <MyActivities currentUser={currentUser} userReviews={userReviews}/>
+              <MyActivities currentUser={currentUser} setCurrentUser={setCurrentUser} userReviews={userReviews}/>
             </Route>
             <Route exact path='/user/places-to-visit' >
-              <PlacesToVisit currentUser={currentUser} userReviews={userReviews}/>
+              <PlacesToVisit currentUser={currentUser} setCurrentUser={setCurrentUser} userReviews={userReviews}/>
             </Route>
             <Route exact path='/user/favorites'> 
-              <ViewFavorites currentUser={currentUser} userReviews={userReviews}/>
+              <ViewFavorites currentUser={currentUser} setCurrentUser={setCurrentUser} userReviews={userReviews}/>
             </Route>
             <Route exact path='/user/update' >
-              <UpdateUser currentUser={currentUser} userReviews={userReviews}/>
+              <UpdateUser currentUser={currentUser} setCurrentUser={setCurrentUser} userReviews={userReviews}/>
             </Route>
             <Route exact path='/city' >
-              <Cities selectedCity={selectedCity}/>
+              <Cities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
             </Route>
             <Route exact path='/city/add-activity' >
-              <AddActivity selectedCity={selectedCity}/>
+              <AddActivity currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
             </Route>
             <Route exact path='/city/adult' >
-              <AdultActivities selectedCity={selectedCity}/>
+              <AdultActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
             </Route>
             <Route exact path='/city/all' >
-              <AllActivitiesByCity selectedCity={selectedCity} locations={locations}/>
+              <AllActivitiesByCity currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity} locations={locations}/>
             </Route>
             <Route exact path='/city/baby' >
-              <BabyActivities selectedCity={selectedCity}/>
+              <BabyActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
             </Route>
             <Route exact path='/city/free' >
-              <FreeActivities selectedCity={selectedCity} locations={locations}/>
+              <FreeActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity} locations={locations}/>
             </Route>
             <Route exact path='/city/outdoor' >
-              <OutdoorActivities selectedCity={selectedCity} locations={locations}/>
+              <OutdoorActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity} locations={locations}/>
             </Route>
             <Route exact path='/city/preschool' >
-              <PreschoolActivities selectedCity={selectedCity}/>
+              <PreschoolActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
             </Route>
             <Route exact path='/city/school-age' >
-              <SchoolAgeActivities selectedCity={selectedCity}/>
+              <SchoolAgeActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
             </Route>
             <Route exact path='/city/toddler' >
-              <ToddlerActivities selectedCity={selectedCity}/>
+              <ToddlerActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
             </Route>
           </Switch>
           {/* <div>

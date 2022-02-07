@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import ActivityCard from './ActivityCard'
 
-function SchoolAgeActivities ({selectedCity}) {
+function SchoolAgeActivities ({currentUser, selectedCity}) {
 
   const [schoolAgeActivities, setSchoolAgeActivities] = useState([])
 
@@ -17,7 +17,7 @@ function SchoolAgeActivities ({selectedCity}) {
     <div>
       <h1>School-Age Activities in {selectedCity.city_name}</h1>
       {schoolAgeActivities.map((location) => (
-       <ActivityCard location={location}/>
+       <ActivityCard currentUser={currentUser} location={location}/>
      ))}
     </div>
   )

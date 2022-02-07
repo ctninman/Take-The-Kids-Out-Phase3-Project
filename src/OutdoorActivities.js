@@ -1,6 +1,6 @@
 import ActivityCard from "./ActivityCard";
 
-function OutdoorActivities ({selectedCity, locations}) {
+function OutdoorActivities ({currentUser, selectedCity, locations}) {
   
   const outdoorLocations = locations.filter ((location) => location.city_id === selectedCity.id && location.outdoor === true);
 
@@ -8,7 +8,7 @@ function OutdoorActivities ({selectedCity, locations}) {
     <div>
       <h1>OutdoorActivities in {selectedCity.city_name}</h1>
      {outdoorLocations.map((location) => (
-       <ActivityCard location={location}/>
+       <ActivityCard currentUser={currentUser} location={location}/>
      ))}
      </div>
   )

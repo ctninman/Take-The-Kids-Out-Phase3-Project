@@ -6,7 +6,7 @@ function MyActivities ({currentUser, userReviews}) {
     <div>
       <h1>{currentUser.user_name} Has Been To:</h1>
       {userReviews.map((userFavorite) => (
-       <UserActivityCard userFavorite={userFavorite}/>
+       <UserActivityCard currentUser={currentUser} userFavorite={userFavorite}/>
      ))}
     </div>
   )

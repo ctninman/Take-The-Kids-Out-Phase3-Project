@@ -1,8 +1,9 @@
+import { useState } from 'react'
 import UserActivityCard from './UserActivityCard'
 
 function PlacesToVisit ({currentUser, userReviews}) {
   
-  let wantsToVisit = userReviews.filter((review) => review.want_to_visit === true)
+  const [wantsToVisit, setWantsToVisit] = useState(currentUser.favorites.filter((review) => review.want_to_visit === true))
 
   return(
     <div>

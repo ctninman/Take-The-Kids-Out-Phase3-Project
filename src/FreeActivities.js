@@ -1,7 +1,7 @@
 import ActivityCard from './ActivityCard'
 import {useEffect} from 'react'
 
-function FreeActivities ({selectedCity, locations}) {
+function FreeActivities ({currentUser, selectedCity, locations}) {
 
   const freeLocations = locations.filter ((location) => location.city_id === selectedCity.id && location.free === true);
 
@@ -10,7 +10,7 @@ function FreeActivities ({selectedCity, locations}) {
     <div>
       <h1>Free Activities in {selectedCity.city_name}</h1>
       {freeLocations.map((location) => (
-       <ActivityCard location={location}/>
+       <ActivityCard currentUser={currentUser} location={location}/>
      ))}
     </div>
   )

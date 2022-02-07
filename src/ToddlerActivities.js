@@ -1,7 +1,7 @@
 import {useState, useEffect} from 'react'
 import ActivityCard from './ActivityCard'
 
-function ToddlerActivities ({selectedCity}) {
+function ToddlerActivities ({currentUser, selectedCity}) {
 
   const [toddlerActivities, setToddlerActivities] = useState([])
 
@@ -17,7 +17,7 @@ function ToddlerActivities ({selectedCity}) {
     <div>
       <h1>Toddler Activities in {selectedCity.city_name}</h1>
       {toddlerActivities.map((location) => (
-       <ActivityCard location={location}/>
+       <ActivityCard currentUser={currentUser} location={location}/>
      ))}
     </div>
   )
