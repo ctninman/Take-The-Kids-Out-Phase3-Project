@@ -1,11 +1,11 @@
 import { Route, Switch } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import { useHistory } from 'react-router'
 import NavBar from './NavBar'
 import Home from './Home'
 import Login from './Login'
 import Cities from './Cities'
-import MyActivities from './MyActivities'
-import PlacesToVisit from './PlacesToVisit'
+import MyReviews from './MyReviews'
 import ViewFavorites from './ViewFavorites'
 import UpdateUser from './UpdateUser'
 import AddActivity from './AddActivity'
@@ -18,18 +18,21 @@ import PreschoolActivities from './PreschoolActivities'
 import SchoolAgeActivities from './SchoolAgeActivities'
 import ToddlerActivities from './ToddlerActivities'
 import CreateUser from './CreateUser'
+import CreateReview from './CreateReview'
 import CityCard from './CityCard'
 
 function App() {
 
   const [cities, setCities] = useState([])
-  const [locations, setLocations]  = useState([])
+  const [reviewLocationId, setReviewLocationId]  = useState(1)
   const [currentUser, setCurrentUser] = useState ('')
   const [userName, setUserName] = useState ('')
   const [selectedCity, setSelectedCity] = useState ('')
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
   const [userReviews, setUserReviews] = useState('')
+
+  let history = useHistory()
 
   useEffect (() => {
     fetch('http://localhost:9293/cities')
@@ -40,23 +43,23 @@ function App() {
     })
   }, [] )
 
-  useEffect (() => {
-    fetch('http://localhost:9293/locations')
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      setLocations(data)
-    })
-  }, [] )
+  // useEffect (() => {
+  //   fetch('http://localhost:9293/locations')
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     console.log(data);
+  //     setLocations(data)
+  //   })
+  // }, [] )
 
   useEffect (() => {
     if (currentUser != ""){
       fetch(`http://localhost:9293/users/${currentUser.id}/reviews`)
       .then(res => res.json())
       .then(data => {
-        console.log('fav', data)
+        console.log('rev', data)
         let filteredByFavorites = data.filter((review) => review.favorite === true)
-        console.log('filfav', filteredByFavorites)
+        console.log('filrev', filteredByFavorites)
         setUserReviews(data)
     })}
   }, [currentUser] )
@@ -75,6 +78,7 @@ function App() {
         if (foundUser) {
           console.log('I found you!')
           setCurrentUser(foundUser)
+          history.push('/user')
         } else {
           alert('That username/password combination was not found')
         }
@@ -86,16 +90,17 @@ function App() {
   return (
     <div className="App">
       <NavBar
-        className='NavBar' />
+        className='NavBar' currentUser={currentUser} setCurrentUser={setCurrentUser}/>
           <Switch>
             <Route exact path='/user'>
-              <Login currentUser={currentUser}/>
+              <Login 
+                currentUser={currentUser}
+                setSelectedCity={setSelectedCity}/>
             </Route>
             <Route exact path='/user/create'>
-              <CreateUser />
-            </Route>
-            <Route exact path='/city'>
-              <Cities selectedCity={selectedCity}/>
+              <CreateUser 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser}/>
             </Route>
             <Route exact path='/'>
               <Home 
@@ -103,61 +108,112 @@ function App() {
                 setCities={setCities}
                 selectedCity={selectedCity}
                 setSelectedCity={setSelectedCity}
-                userName={userName}
-                setUserName={setUserName}
                 setPassword={setPassword}
                 enterUserName={enterUserName}
                 setLogin={setLogin}
+                currentUser={currentUser}
                 />
             </Route>
-            <Route exact path='/user/activities' >
-              <MyActivities currentUser={currentUser} setCurrentUser={setCurrentUser} userReviews={userReviews}/>
-            </Route>
-            <Route exact path='/user/places-to-visit' >
-              <PlacesToVisit currentUser={currentUser} setCurrentUser={setCurrentUser} userReviews={userReviews}/>
+            <Route exact path='/user/reviews' >
+              <MyReviews 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser} />
             </Route>
             <Route exact path='/user/favorites'> 
-              <ViewFavorites currentUser={currentUser} setCurrentUser={setCurrentUser} userReviews={userReviews}/>
+              <ViewFavorites 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser} />
             </Route>
             <Route exact path='/user/update' >
-              <UpdateUser currentUser={currentUser} setCurrentUser={setCurrentUser} userReviews={userReviews}/>
+              <UpdateUser 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser} />
             </Route>
             <Route exact path='/city' >
-              <Cities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
+              <Cities 
+                cities={cities} 
+                setCities={setCities} 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser} 
+                selectedCity={selectedCity} 
+                setSelectedCity={setSelectedCity}/>
             </Route>
             <Route exact path='/city/add-activity' >
-              <AddActivity currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
+              <AddActivity 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser} 
+                selectedCity={selectedCity} 
+                setSelectedCity={setSelectedCity}/>
+            </Route>
+            <Route exact path='/write_review' >
+              <CreateReview 
+                currentUser={currentUser}
+                setCurrentUser={setCurrentUser}
+                reviewLocationId={reviewLocationId}/>
             </Route>
             <Route exact path='/city/adult' >
-              <AdultActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
+              <AdultActivities 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser} 
+                selectedCity={selectedCity}
+                reviewLocationId={reviewLocationId}
+                setReviewLocationId={setReviewLocationId}/>
             </Route>
             <Route exact path='/city/all' >
-              <AllActivitiesByCity currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity} locations={locations}/>
+              <AllActivitiesByCity 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser} 
+                selectedCity={selectedCity}
+                reviewLocationId={reviewLocationId}
+                setReviewLocationId={setReviewLocationId}/>
             </Route>
             <Route exact path='/city/baby' >
-              <BabyActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
+              <BabyActivities 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser} 
+                selectedCity={selectedCity}
+                reviewLocationId={reviewLocationId}
+                setReviewLocationId={setReviewLocationId}/>
             </Route>
             <Route exact path='/city/free' >
-              <FreeActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity} locations={locations}/>
+              <FreeActivities 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser} 
+                selectedCity={selectedCity}/>
             </Route>
             <Route exact path='/city/outdoor' >
-              <OutdoorActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity} locations={locations}/>
+              <OutdoorActivities 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser} 
+                selectedCity={selectedCity}
+                reviewLocationId={reviewLocationId}
+                setReviewLocationId={setReviewLocationId}/>
             </Route>
             <Route exact path='/city/preschool' >
-              <PreschoolActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
+              <PreschoolActivities 
+                currentUser={currentUser}  
+                setCurrentUser={setCurrentUser} 
+                selectedCity={selectedCity}
+                reviewLocationId={reviewLocationId}
+                setReviewLocationId={setReviewLocationId}/>
             </Route>
             <Route exact path='/city/school-age' >
-              <SchoolAgeActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
+              <SchoolAgeActivities 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser} 
+                selectedCity={selectedCity}
+                reviewLocationId={reviewLocationId}
+                setReviewLocationId={setReviewLocationId}/>
             </Route>
             <Route exact path='/city/toddler' >
-              <ToddlerActivities currentUser={currentUser} setCurrentUser={setCurrentUser} selectedCity={selectedCity}/>
+              <ToddlerActivities 
+                currentUser={currentUser} 
+                setCurrentUser={setCurrentUser} 
+                selectedCity={selectedCity}
+                reviewLocationId={reviewLocationId}
+                setReviewLocationId={setReviewLocationId}/>
             </Route>
           </Switch>
-          {/* <div>
-            {cities.map ((city) => (
-              <CityCard city={city}/>
-            ))}
-          </div> */}
     </div>
   );
 }

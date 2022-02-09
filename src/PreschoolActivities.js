@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react'
 import ActivityCard from './ActivityCard'
+import CityNavBar from './CityNavBar'
 
-function PreschoolActivities ({currentUser, selectedCity}) {
+function PreschoolActivities ({currentUser, setCurrentUser, selectedCity, reviewLocationId, setReviewLocationId}) {
 
   const [preschoolActivities, setPreschoolActivities] = useState([])
 
@@ -15,10 +16,19 @@ function PreschoolActivities ({currentUser, selectedCity}) {
 
   return(
     <div>
-      <h1>Preschool Activities in {selectedCity.city_name}</h1>
+      <h1 className="act-card-section">Preschool Activities in {selectedCity.city_name}</h1>
+      <CityNavBar />
+      <div className='activity-card-container'>
       {preschoolActivities.map((location) => (
-       <ActivityCard currentUser={currentUser} location={location}/>
+       <ActivityCard
+        key={location.id} 
+        currentUser={currentUser} 
+        setCurrentUser={setCurrentUser} 
+        location={location}
+        reviewLocationId={reviewLocationId}
+        setReviewLocationId={setReviewLocationId}/>
      ))}
+     </div>
     </div>
   )
 }

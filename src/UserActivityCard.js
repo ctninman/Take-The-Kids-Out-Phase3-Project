@@ -1,16 +1,33 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useRef} from 'react'
 
-function UserActivityCard ({currentUser, userFavorite}) {
+function UserActivityCard ({setCurrentUser, currentUser, userFavorite, filteredFavorites, setFilteredFavorites}) {
 
   const [userActCardIsFavorite, setUserActCardIsFavorite] = useState(userFavorite.favorite)
   const [userActCardToVisit, setUserActCardToVisit] = useState(userFavorite.want_to_visit)
   const [userActCardWasVisited, setUserActCardWasVisited] = useState(userFavorite.visited)
   const [visible, setVisible] = useState(true);
 
+  const firstUpdate = useRef(true);
+
+  // useEffect(() => {
+  //   if (firstUpdate.current) {
+  //     firstUpdate.current = false;
+  //     return;
+
   useEffect(() => {
-    if (userActCardToVisit === false && userActCardWasVisited === false && userActCardIsFavorite ===false) {
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return
+    } else if (userActCardToVisit === false && userActCardWasVisited === false && userActCardIsFavorite ===false) {
       deleteUserFavorite(userFavorite.id)
       setVisible(false)
+    } else {
+      let patchFavorite = {
+        "want_to_visit": userActCardToVisit,
+        "favorite": userActCardIsFavorite,
+        "visited": userActCardWasVisited
+      }
+      patchUserFavorite(patchFavorite, userFavorite.id)
     }
   }, [userActCardWasVisited, userActCardToVisit, userActCardIsFavorite]) 
 
@@ -19,7 +36,10 @@ function deleteUserFavorite (id) {
     method: "DELETE",
   })
   .then((r) => r.json())
-  .then((data) => console.log(data))
+  .then((data) => {
+    setCurrentUser(data.user)
+    setFilteredFavorites(data.user.favorites)
+  })
 }
 
 
@@ -35,6 +55,7 @@ function deleteUserFavorite (id) {
       .then((data) => {
         console.log('patchy', data);
         // setCurrentUser(data.user)
+        // setFilteredFavorites(data.user.favorites)
       })
   }
 
@@ -56,11 +77,11 @@ function deleteUserFavorite (id) {
   // function handleRemoveFromFavorites (event) {
   //   console.log('ev', event.target.value)
   //   setToVisit(!toVisit)
-  //   let patchFavorite = {
-  //     "want_to_visit": userActCardToVisit,
-  //     "favorite": userActCardIsFavorite,
-  //     "visited": userActCardWasVisited
-  //   }
+    // let patchFavorite = {
+    //   "want_to_visit": userActCardToVisit,
+    //   "favorite": userActCardIsFavorite,
+    //   "visited": userActCardWasVisited
+    // }
   //   patchUserFavorite(patchFavorite, foundFavorite.id)
   // }
 
@@ -71,14 +92,11 @@ function deleteUserFavorite (id) {
   // }
 
   return visible ? 
-    <>
+    <div style={{display: 'flex', flexDirection:'column', backgroundColor: 'orange', margin: '10px', padding: '20px'}}>
       <div>
-      <h1>{userFavorite.location.location_name}</h1>
-      <button value={userFavorite.id} onClick={handleRemoveFromFavorites}>Remove Favorite</button>
-      <button value={userFavorite.id} onClick={handleRemoveFromToVisit}>Remove To Visit</button>
-      <button value={userFavorite.id} onClick={handleRemoveFromVisited}>Remove Visited</button>
-    </div>
-    <div>
+        <h1>{userFavorite.location.location_name}</h1>
+      </div>
+      <div>
         {userActCardIsFavorite 
           ? 
         <button style={{backgroundColor: 'lightgreen'}} onClick={handleRemoveFromFavorites}>Remove From Favorites</button>
@@ -95,7 +113,7 @@ function deleteUserFavorite (id) {
           :
         <button onClick={handleRemoveFromVisited}>Been There!</button>}
       </div>
-    </>
+    </div>
       :
     null
 }

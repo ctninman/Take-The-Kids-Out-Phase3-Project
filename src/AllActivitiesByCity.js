@@ -1,19 +1,28 @@
 import ActivityCard from "./ActivityCard"
+import CityNavBar from "./CityNavBar"
 
-function AllActivitiesByCity ({currentUser, setCurrentUser, selectedCity, locations}) {
+function AllActivitiesByCity ({currentUser, setCurrentUser, selectedCity, reviewLocationId, setReviewLocationId}) {
 
-  const currentCityLocations = locations.filter((location) => location.city_id === selectedCity.id)
+  const currentCityLocations = selectedCity.locations.filter((location) => location.city_id === selectedCity.id)
 
   return(
     <div>
-      <h1>All Activities in {selectedCity.city_name}</h1>
+      <div>
+      <h1 className="act-card-section">All Activities in {selectedCity.city_name}</h1>
+      </div>
+      <CityNavBar />
+      <div className='activity-card-container'>
       {currentCityLocations.map((location) => (
        <ActivityCard 
+        key={location.id}
         location={location} 
         setCurrentUser={setCurrentUser} 
         currentUser={currentUser}
+        reviewLocationId={reviewLocationId}
+        setReviewLocationId={setReviewLocationId}
         />
      ))}
+     </div>
     </div>
   )
 }

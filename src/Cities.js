@@ -1,7 +1,18 @@
+import { useEffect } from 'react';
 import {NavLink} from 'react-router-dom'
 import CityCard from './CityCard';
+import CityNavBar from './CityNavBar';
 
-function Cities ({selectedCity}) {
+function Cities ({selectedCity, setSelectedCity, cities, setCities}) {
+
+  useEffect (() => {
+    fetch('http://localhost:9293/cities')
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      setCities(data)
+    })
+  }, [] )
 
   const loginLinkStyles = {
     display: "inline-block",
@@ -14,12 +25,25 @@ function Cities ({selectedCity}) {
     borderRadius: '5px'
   };
 
-  return(
-    
+  return (selectedCity === "") ?
+    <>
+      <h1 style={{textAlign: 'center', fontSize: '40px'}}>Select a city:</h1>
+      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+        {cities.map ((city) => (
+          <CityCard
+            key={city.id} 
+            city={city}
+            selectedCity={selectedCity}
+            setSelectedCity={setSelectedCity}/>
+          ))}
+      </div>
+    </>
+    :    
     <>
       <div className='cities-page'>
-        <h1 className='tab-header'>Welcome to {selectedCity.city_name}</h1>
-        <NavLink 
+        <h1 className="act-card-section">Welcome to {selectedCity.city_name}</h1>
+        <CityNavBar />
+        {/* <NavLink 
           to="/city"  
           exact 
           style={loginLinkStyles} 
@@ -88,7 +112,7 @@ function Cities ({selectedCity}) {
           style={loginLinkStyles}  
           activeStyle={{background: "#93C572", color: 'black'}}
           >Highest Rated for Toddlers
-        </NavLink>
+        </NavLink> */}
         {/* <Switch> */}
           {/* <Route exact path='/user'>
             <Login />
@@ -108,7 +132,6 @@ function Cities ({selectedCity}) {
         {/* </Switch> */}
       </div>
     </>
-  )
 }
 
 export default Cities

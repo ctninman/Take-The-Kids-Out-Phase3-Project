@@ -1,7 +1,8 @@
 import {useState, useEffect} from 'react'
 import ActivityCard from './ActivityCard'
+import CityNavBar from './CityNavBar'
 
-function SchoolAgeActivities ({currentUser, selectedCity}) {
+function SchoolAgeActivities ({currentUser, setCurrentUser, selectedCity, reviewLocationId, setReviewLocationId}) {
 
   const [schoolAgeActivities, setSchoolAgeActivities] = useState([])
 
@@ -15,10 +16,19 @@ function SchoolAgeActivities ({currentUser, selectedCity}) {
 
   return(
     <div>
-      <h1>School-Age Activities in {selectedCity.city_name}</h1>
+      <h1 className="act-card-section">School-Age Activities in {selectedCity.city_name}</h1>
+      <CityNavBar />
+      <div className='activity-card-container'>
       {schoolAgeActivities.map((location) => (
-       <ActivityCard currentUser={currentUser} location={location}/>
+       <ActivityCard 
+        key={location.id}
+        currentUser={currentUser} 
+        setCurrentUser={setCurrentUser} 
+        location={location}
+        reviewLocationId={reviewLocationId}
+        setReviewLocationId={setReviewLocationId}/>
      ))}
+     </div>
     </div>
   )
 }

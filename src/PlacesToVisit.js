@@ -9,7 +9,9 @@ function PlacesToVisit ({currentUser, userReviews}) {
     <div>
       <h1>{currentUser.user_name} Want to Visit:</h1>
       {wantsToVisit.map((userFavorite) => (
-       <UserActivityCard userFavorite={userFavorite}/>
+       <UserActivityCard 
+        key={userFavorite.id}
+        userFavorite={userFavorite}/>
      ))}
     </div>
   )

@@ -19,7 +19,7 @@ function CityCard ({city, selectedCity, setSelectedCity}) {
     >
       <button
         onClick={handleCitySelect} 
-        style={{backgroundColor: 'orange', margin: '5px'}} 
+        className='city-card'
         value={city.city_name}
         >{city.city_name}
       </button>

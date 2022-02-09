@@ -13,6 +13,27 @@
   }
 }
 
+.activity-card {
+  display: flex;
+  border: solid 10px #04BF9D; 
+  flex-direction: row;
+  background-color: white; 
+  border-radius: 10px; 
+  margin: 20px; 
+  padding: 20px;
+}
+
+.act-card-section {
+  display: flex;
+  /* border: solid 10px #04BF9D;  */
+  flex-direction: row;
+  justify-content: center;
+  background-color: white; 
+  border-radius: 10px; 
+  margin: 5px; 
+  padding: 5px;
+}
+
 .App-header {
   background-color: #282c34;
   min-height: 100vh;

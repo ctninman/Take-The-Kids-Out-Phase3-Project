@@ -1,6 +1,7 @@
 import {useState} from 'react'
+import {useHistory} from 'react-router'
 
-function CreateUser () {
+function CreateUser ({currentUser, setCurrentUser}) {
 
 
   const [newUserName, setNewUserName] = useState(null)
@@ -8,6 +9,8 @@ function CreateUser () {
   const [newUserCity, setNewUserCity] = useState(null)
   const [newUserKids, setNewUserKids] = useState(null)
   const [newUserPhoto, setNewUserPhoto] = useState(false)
+
+  let history = useHistory()
 
   function onUserNameChange (event) {
     setNewUserName(event.target.value)
@@ -35,8 +38,11 @@ function CreateUser () {
       headers: {"Content-Type": "application/json",},
       body: JSON.stringify(object),
     })
-      .then((res) => {
-        console.log(res.json())
+      .then((res) => res.json())
+      .then((data) => {
+        setCurrentUser(data)
+        console.log('data', data)
+        console.log('cu', currentUser)
       })
   }
 
@@ -52,6 +58,7 @@ function CreateUser () {
     }
     console.log('newac', newUser)
     postNewUser(newUser)
+    history.push('/user')
   }
 
 

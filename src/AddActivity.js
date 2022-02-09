@@ -1,6 +1,7 @@
 import {useState} from 'react'
+import CityNavBar from './CityNavBar'
 
-function AddActivity ({selectedCity}) {
+function AddActivity ({selectedCity, setSelectedCity, currentUser}) {
 
   const [formActivityName, setFormActivityName] = useState(null)
   const [formDescription, setFormDescription] = useState(null)
@@ -57,6 +58,11 @@ function AddActivity ({selectedCity}) {
       .then((res) => {
         return res.json()
       })
+      .then ((data) => {
+        let copyOfCity = {...selectedCity}
+        copyOfCity.locations.push(data)
+        setSelectedCity(copyOfCity)
+      })
   }
 
   function handleSubmit(event) {
@@ -78,9 +84,13 @@ function AddActivity ({selectedCity}) {
     postNewActivity(newActivity)
   }
 
-  return(
+  return (currentUser === '') ?
+  <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
+    :
+  <>
     <div>
-      <h1>Add Activity to {selectedCity.city_name}</h1>
+      <h1 className='act-card-section' >Add Activity to {selectedCity.city_name}</h1>
+      <CityNavBar />
       <form 
         style={{display: 'flex', flexDirection:'column', backgroundColor: 'orange', margin: '10px', padding: '20px'}}
         id='activity-form'
@@ -165,7 +175,7 @@ function AddActivity ({selectedCity}) {
           </button>
       </form>
     </div>
-  )
+  </>
 }
 
 export default AddActivity

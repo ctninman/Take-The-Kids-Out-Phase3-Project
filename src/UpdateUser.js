@@ -1,7 +1,9 @@
 import {useState} from 'react'
+import {useHistory} from 'react-router-dom'
 
-function UpdateUser ({currentUser}) {
+function UpdateUser ({setCurrentUser, currentUser}) {
   
+  let history = useHistory()
   
   const [formUserName, setFormUserName] = useState(currentUser.user_name)
   const [formUserPassword, setFormUserPassword] = useState(currentUser.password)
@@ -36,7 +38,7 @@ function UpdateUser ({currentUser}) {
       body: JSON.stringify(object),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data))
+      .then((data) => setCurrentUser(data))
   }
 
   function handleUserUpdate(event) {
@@ -51,13 +53,14 @@ function UpdateUser ({currentUser}) {
     }
     console.log('newac', updatedUser)
     patchUpdatedUser(updatedUser)
+    history.push('/user')
   }
 
 
 
   return (
     <div>
-      <h1>Create User</h1>
+      <h1>Update My Info</h1>
       <form 
         style={{display: 'flex', flexDirection:'column', backgroundColor: 'orange', margin: '10px', padding: '20px'}}
         id='create-user-form'
