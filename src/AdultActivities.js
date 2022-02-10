@@ -17,7 +17,7 @@ function AdultActivities ({selectedCity, currentUser, setCurrentUser, reviewLoca
 
   return(
     <div>
-      <h1 className="act-card-section">Also Enjoyable For Adult in {selectedCity.city_name}</h1>
+      <h1 className="act-card-section">Also Enjoyable For Adults in {selectedCity.city_name}</h1>
       <CityNavBar />
       <div className='activity-card-container'>
       {adultActivities.map((location) => (

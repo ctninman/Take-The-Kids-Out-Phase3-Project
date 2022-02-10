@@ -58,27 +58,35 @@ function UpdateUser ({setCurrentUser, currentUser}) {
 
 
 
-  return (
+  return currentUser === "" ?
+  <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
+      :
     <div>
-      <h1>Update My Info</h1>
+      <h1 className='act-card-section'>Update My Info</h1>
+      <div style={{display: 'flex', justifyContent: 'center', marginLeft: '10%', marginRight: '10%'}}>
       <form 
+        className='activity-form'
         style={{display: 'flex', flexDirection:'column', backgroundColor: 'orange', margin: '10px', padding: '20px'}}
         id='create-user-form'
         onSubmit={handleUserUpdate}>
-        <input 
-          name='newuser-name'
-          value={formUserName}
-          type='text' 
-          placeholder='Enter Your User Name'
-          onChange={onUserNameChange}>
-        </input>
-        <input 
-          name='newuser-password'
-          value={formUserPassword}
-          type='text' 
-          placeholder='Create Your Password'
-          onChange={onUserPasswordChange}>
-        </input>
+        <div>
+          <label>Update Name:</label>
+          <input 
+            name='newuser-name'
+            value={formUserName}
+            type='text' 
+            onChange={onUserNameChange}>
+          </input>
+        </div>
+        <div>
+        <label>Update Password:</label>
+          <input 
+            name='newuser-password'
+            value={formUserPassword}
+            type='text' 
+            onChange={onUserPasswordChange}>
+          </input>
+        </div>
         <div>
         <label>Your City</label>
         <select value={formUserCity} name={'cities-form'} id={'cities-form'} onChange={onUserCityChange}>
@@ -104,15 +112,15 @@ function UpdateUser ({setCurrentUser, currentUser}) {
           <option value={10}>10</option>
         </select>
         </div> */}
-        
-        <input 
-          name='newuser_photo'
-          value={formUserPhoto}
-          type='text' 
-          placeholder='Photo Link'
-          onChange={onUserPhotoChange}>
-        </input>
-
+        <div>
+        <label>Update Photo:</label>
+          <input 
+            name='newuser_photo'
+            value={formUserPhoto}
+            type='text' 
+            onChange={onUserPhotoChange}>
+          </input>
+        </div>
         <button
           type='submit'
           value="Enter"
@@ -122,8 +130,8 @@ function UpdateUser ({setCurrentUser, currentUser}) {
             Update My Info!
           </button>
       </form>
+      </div>
     </div>
-  )
 }
 
 

@@ -29,6 +29,18 @@ code {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
+.review-card {
+  display: flex;
+  border: solid 10px #F29F05; 
+  flex-flow: column wrap;
+  justify-content: center;
+  background-color: #F2CB05; 
+  border-radius: 10px; 
+  margin: 10px; 
+  padding: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
 .activity-card-container {
   display: flex;
   
@@ -141,7 +153,18 @@ code {
 .favorite-button {
   font-family: 'Supermercado One', cursive;
   background-color: white;
-  width: 75%;
+  width: 150px;
+  border-radius: 3px;
+  height: 25px;
+  margin: 3px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.type-button {
+  font-family: 'Supermercado One', cursive;
+  background-color: #022873;
+  color: white;
+  width: 150px;
   border-radius: 3px;
   height: 25px;
   margin: 3px;
@@ -153,6 +176,18 @@ code {
   background-color: #022873;
   color: white;
   width: 55%;
+  height: 25px;
+  margin: 3px;
+  border-radius: 3px;
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset; */
+}
+
+.delete-button {
+  font-family: 'Supermercado One', cursive;
+  background-color: #022873;
+  color: white;
+  margin-left: 25%;
+  margin-right: 25%;
   height: 25px;
   margin: 3px;
   border-radius: 3px;
@@ -175,7 +210,8 @@ code {
   height: 150px;
   border: 2px solid #022873;
   border-radius: 10%;
-  width: 150px;
+  width: auto;
+  max-width: 90%;
   align-self: center;
 }
 
@@ -195,6 +231,13 @@ input {
 .account-button {
   border-radius: 5px;
   font-family: 'Supermercado One', cursive;
+  height: 30px;
+  font-size: large;
   background-color: #022873;
   color: white;
+}
+
+.rating {
+  margin: 0px;
+  padding: 0px;
 }

@@ -3,6 +3,7 @@ import MyReviews from './MyReviews'
 import PlacesToVisit from './PlacesToVisit'
 import ViewFavorites from './ViewFavorites'
 import UpdateUser from './UpdateUser'
+import UserNavBar from './UserNavBar'
 
 function Login ({currentUser, setSelectedCity}) {
 
@@ -21,7 +22,7 @@ function Login ({currentUser, setSelectedCity}) {
 
   }
 
-  return (currentUser === '') ?
+  return (currentUser === '' || currentUser === null) ?
   <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
   :
     <>
@@ -29,7 +30,8 @@ function Login ({currentUser, setSelectedCity}) {
 
       <div><h1 className="act-card-section">Welcome, {currentUser.user_name}</h1></div>
       <div className='login-page'>
-        <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', marginTop: '3px', marginBottom: '3px'}}>
+        <UserNavBar />
+        {/* <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', marginTop: '3px', marginBottom: '3px'}}>
         <NavLink 
           to="/user"  
           exact 
@@ -62,7 +64,7 @@ function Login ({currentUser, setSelectedCity}) {
           activeStyle={{background: "#FB7498", color: 'black'}}
           >Update My Info
         </NavLink>
-        </div>
+        </div> */}
         <div style={{display: 'flex', justifyContent: 'center'}}>
           {currentUser.reviews.length < 5 ? <h1 >Your community needs to hear your opinions!</h1> : null}
           {currentUser.reviews.length >= 5 && currentUser.reviews.length < 10 ? <h1>Thanks for being an active member in your community!</h1> : null}

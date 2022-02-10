@@ -7,7 +7,7 @@ function CreateReview ({currentUser, setCurrentUser, reviewLocationId}) {
 
 
   const [reviewDescription, setReviewDescription] = useState('')
-  const [reviewBabyRating, setReviewBabyRating] = useState(null)
+  const [reviewRating, setReviewRating] = useState({baby: null, adult: null, toddler: null, preschool: null, schoolage: null, overall: null})
   // const [reviewUserCity, setReviewUserCity] = useState(null)
   // const [reviewUserKids, setReviewUserKids] = useState(null)
   // const [reviewUserPhoto, setReviewUserPhoto] = useState(false)
@@ -18,8 +18,12 @@ function CreateReview ({currentUser, setCurrentUser, reviewLocationId}) {
     setReviewDescription(event.target.value)
   }
 
-  function onBabyRatingChange (event) {
-    setReviewBabyRating(event.target.value)
+  //passing callback into setReviewRating gets most up to date state
+  function onRatingClick (event) {
+    setReviewRating( (prevReviewRating) => ({
+      ...prevReviewRating, 
+      [event.target.name]: event.target.value
+    }))
   }
 
   // function onUserCityChange (event) {
@@ -55,10 +59,10 @@ function CreateReview ({currentUser, setCurrentUser, reviewLocationId}) {
       user_id: currentUser.id,
       review: reviewDescription,
       baby_rating: 5,
-      toddler_rating: 5,
-      preschool_rating: 5,
-      school_age_rating: 5,
-      adult_rating: 5,
+      toddler_rating: 4,
+      preschool_rating: 2,
+      school_age_rating: 3,
+      adult_rating: 4,
       general_rating: 5,
       educational_value: 5
     }
@@ -69,9 +73,11 @@ function CreateReview ({currentUser, setCurrentUser, reviewLocationId}) {
 
 
 
-  return (
+  return (currentUser === '') ?
+    <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
+      :
     <div>
-      <h1>Create Review</h1>
+      <h1 className='act-card-section'>Create Review</h1>
       <form 
         style={{display: 'flex', flexDirection:'column', backgroundColor: 'orange', margin: '10px', padding: '20px'}}
         id='create-review-form'
@@ -87,7 +93,7 @@ function CreateReview ({currentUser, setCurrentUser, reviewLocationId}) {
         </input>
         <div style={{display: 'flex', flexDirection: 'row'}}>
           <label>Rating for Babies (0-12 Months)</label>
-          <input name='baby' type='radio' value={1} /> 1
+          <input onClick={onRatingClick} name='baby' type='radio' value={1} /> 1
           <input name='baby' type='radio' value={2} /> 2
           <input name='baby' type='radio' value={3} /> 3
           <input name='baby' type='radio' value={4} /> 4
@@ -145,7 +151,6 @@ function CreateReview ({currentUser, setCurrentUser, reviewLocationId}) {
           </button>
       </form>
     </div>
-  )
 }
 
 export default CreateReview

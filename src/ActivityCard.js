@@ -19,7 +19,6 @@ function ActivityCard ({location, setCurrentUser, currentUser, reviewLocationId,
 
   useEffect(() => {
     if (firstUpdate.current) {
-      console.log('fu current true')
       firstUpdate.current = false;
       return;
     }

@@ -86,6 +86,7 @@ function App() {
     }
   }
 
+  // <Route exact path='/user' component={() => <Login />} />
 
   return (
     <div className="App">
@@ -115,19 +116,24 @@ function App() {
                 />
             </Route>
             <Route exact path='/user/reviews' >
+              {(!currentUser || currentUser === '') ? <Login currentUser={''}/> :
               <MyReviews 
                 currentUser={currentUser} 
-                setCurrentUser={setCurrentUser} />
+                setCurrentUser={setCurrentUser} />}
             </Route>
             <Route exact path='/user/favorites'> 
+            {(!currentUser || currentUser === '') ? <Login currentUser={''}/> :
               <ViewFavorites 
                 currentUser={currentUser} 
-                setCurrentUser={setCurrentUser} />
+                setCurrentUser={setCurrentUser} 
+                reviewLocationId={reviewLocationId}
+                setReviewLocationId={setReviewLocationId}/>}
             </Route>
             <Route exact path='/user/update' >
+            {(!currentUser || currentUser === '') ? <Login currentUser={''}/> :
               <UpdateUser 
                 currentUser={currentUser} 
-                setCurrentUser={setCurrentUser} />
+                setCurrentUser={setCurrentUser} />}
             </Route>
             <Route exact path='/city' >
               <Cities 
@@ -152,66 +158,79 @@ function App() {
                 reviewLocationId={reviewLocationId}/>
             </Route>
             <Route exact path='/city/adult' >
+            {(!selectedCity || selectedCity === '') ? <><h1 style={{textAlign: 'center'}}>No City Was Selected.</h1> <h2 style={{textAlign: 'center'}}>Where Would You Like To Explore?</h2></> :
               <AdultActivities 
                 currentUser={currentUser} 
                 setCurrentUser={setCurrentUser} 
                 selectedCity={selectedCity}
                 reviewLocationId={reviewLocationId}
-                setReviewLocationId={setReviewLocationId}/>
+                setReviewLocationId={setReviewLocationId}/>}
             </Route>
             <Route exact path='/city/all' >
+            {(!selectedCity || selectedCity === '') ? <><h1 style={{textAlign: 'center'}}>No City Was Selected.</h1> <h2 style={{textAlign: 'center'}}>Where Would You Like To Explore?</h2></> :
               <AllActivitiesByCity 
                 currentUser={currentUser} 
                 setCurrentUser={setCurrentUser} 
                 selectedCity={selectedCity}
                 reviewLocationId={reviewLocationId}
-                setReviewLocationId={setReviewLocationId}/>
+                setReviewLocationId={setReviewLocationId}/>}
             </Route>
             <Route exact path='/city/baby' >
+            {(!selectedCity || selectedCity === '') ? <><h1 style={{textAlign: 'center'}}>No City Was Selected.</h1> <h2 style={{textAlign: 'center'}}>Where Would You Like To Explore?</h2></> :
               <BabyActivities 
                 currentUser={currentUser} 
                 setCurrentUser={setCurrentUser} 
                 selectedCity={selectedCity}
                 reviewLocationId={reviewLocationId}
-                setReviewLocationId={setReviewLocationId}/>
+                setReviewLocationId={setReviewLocationId}/>}
             </Route>
             <Route exact path='/city/free' >
+            {(!selectedCity || selectedCity === '') ? <><h1 style={{textAlign: 'center'}}>No City Was Selected.</h1> <h2 style={{textAlign: 'center'}}>Where Would You Like To Explore?</h2></> :
               <FreeActivities 
                 currentUser={currentUser} 
                 setCurrentUser={setCurrentUser} 
-                selectedCity={selectedCity}/>
+                selectedCity={selectedCity}/>}
             </Route>
             <Route exact path='/city/outdoor' >
+            {(!selectedCity || selectedCity === '') ? <><h1 style={{textAlign: 'center'}}>No City Was Selected.</h1> <h2 style={{textAlign: 'center'}}>Where Would You Like To Explore?</h2></> :
               <OutdoorActivities 
                 currentUser={currentUser} 
                 setCurrentUser={setCurrentUser} 
                 selectedCity={selectedCity}
                 reviewLocationId={reviewLocationId}
-                setReviewLocationId={setReviewLocationId}/>
+                setReviewLocationId={setReviewLocationId}/>}
             </Route>
             <Route exact path='/city/preschool' >
+            {(!selectedCity || selectedCity === '') ? <><h1 style={{textAlign: 'center'}}>No City Was Selected.</h1> <h2 style={{textAlign: 'center'}}>Where Would You Like To Explore?</h2></> :
               <PreschoolActivities 
                 currentUser={currentUser}  
                 setCurrentUser={setCurrentUser} 
                 selectedCity={selectedCity}
                 reviewLocationId={reviewLocationId}
-                setReviewLocationId={setReviewLocationId}/>
+                setReviewLocationId={setReviewLocationId}/>}
             </Route>
             <Route exact path='/city/school-age' >
+            {(!selectedCity || selectedCity === '') ? <><h1 style={{textAlign: 'center'}}>No City Was Selected.</h1> <h2 style={{textAlign: 'center'}}>Where Would You Like To Explore?</h2></> :
               <SchoolAgeActivities 
                 currentUser={currentUser} 
                 setCurrentUser={setCurrentUser} 
                 selectedCity={selectedCity}
                 reviewLocationId={reviewLocationId}
-                setReviewLocationId={setReviewLocationId}/>
+                setReviewLocationId={setReviewLocationId}/>}
             </Route>
             <Route exact path='/city/toddler' >
+            {(!selectedCity || selectedCity === '') ? <><h1 style={{textAlign: 'center'}}>No City Was Selected.</h1> <h2 style={{textAlign: 'center'}}>Where Would You Like To Explore?</h2></> :
               <ToddlerActivities 
                 currentUser={currentUser} 
                 setCurrentUser={setCurrentUser} 
                 selectedCity={selectedCity}
                 reviewLocationId={reviewLocationId}
-                setReviewLocationId={setReviewLocationId}/>
+                setReviewLocationId={setReviewLocationId}/>}
+            </Route>
+            <Route path='*' >
+              <div>
+              <h1 style={{textAlign: 'center'}}>That Page Does Not Exist.</h1>
+              </div>
             </Route>
           </Switch>
     </div>

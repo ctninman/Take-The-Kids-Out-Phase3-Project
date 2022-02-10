@@ -19,21 +19,21 @@ function Home ({cities, selectedCity, setSelectedCity, setLogin, setPassword, en
 
   return (currentUser === '') ?
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-      <div><h1 className="act-card-section">Home</h1></div>
+      {/* <div><h1 className="act-card-section">Home</h1></div> */}
       <div style={{color: '#D95276'}}><h2 style={{textAlign: 'center', fontWeight: 'bolder', textShadow: '0px 0px 6px rgba(255,255,255,0.7)'}}>Your chance to find (and help others find) fun activities to do with the kids!</h2></div>
       <div div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', marginTop: '3px', marginBottom: '3px'}}>
         <form 
         onSubmit={enterUserName}
         id='username-form'>
-        <label>Login:</label><input 
-          style={{marginTop: '8px'}} 
+        <label style={{fontSize: '20px'}}>Login:</label><input 
+          style={{marginTop: '8px', fontSize: 'large'}} 
           name='username_input'
           type='text'
           onChange={handleLoginType} 
           placeholder='Enter username'>
         </input>
         <input 
-          style={{marginTop: '8px'}} 
+          style={{marginTop: '8px', fontSize: 'large'}} 
           name='password_input'
           type='text' 
           onChange={handlePasswordType}
