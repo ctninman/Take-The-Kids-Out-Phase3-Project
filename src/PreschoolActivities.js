@@ -10,7 +10,8 @@ function PreschoolActivities ({currentUser, setCurrentUser, selectedCity, review
     fetch(`http://localhost:9293//cities/${selectedCity.id}/locations/preschool`)
     .then(res => res.json())
     .then(data => {
-      setPreschoolActivities(data)
+      let sortedActivities = data.sort(data.average_preschool_rating)
+      setPreschoolActivities(sortedActivities.reverse())
     })
   }, [] )
 
@@ -22,6 +23,8 @@ function PreschoolActivities ({currentUser, setCurrentUser, selectedCity, review
       {preschoolActivities.map((location) => (
        <ActivityCard
         key={location.id} 
+        ratingAverage={location.average_preschool_rating}
+        age="Preschool Rating"
         currentUser={currentUser} 
         setCurrentUser={setCurrentUser} 
         location={location}

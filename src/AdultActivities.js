@@ -10,7 +10,8 @@ function AdultActivities ({selectedCity, currentUser, setCurrentUser, reviewLoca
     fetch(`http://localhost:9293//cities/${selectedCity.id}/locations/adult`)
     .then(res => res.json())
     .then(data => {
-      setAdultActivities(data)
+      let sortedActivities = data.sort(data.average_adult_rating)
+      setAdultActivities(sortedActivities.reverse())
     })
   }, [] )
 
@@ -22,6 +23,8 @@ function AdultActivities ({selectedCity, currentUser, setCurrentUser, reviewLoca
       {adultActivities.map((location) => (
        <ActivityCard 
         key={location.id}
+        ratingAverage={location.average_adult_rating}
+        age="Adult Rating"
         currentUser={currentUser} 
         setCurrentUser={setCurrentUser} 
         location={location}

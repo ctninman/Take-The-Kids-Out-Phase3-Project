@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react"
 import {useHistory} from 'react-router'
 
-function ActivityCard ({location, setCurrentUser, currentUser, reviewLocationId, setReviewLocationId}) {
+function ActivityCard ({location, setCurrentUser, currentUser, reviewLocationId, setReviewLocationId, ratingAverage, age}) {
 
   let verifiedUser = (currentUser != '') ? currentUser.favorites.find((favorite) => favorite.location_id === location.id) : null
  
@@ -128,6 +128,9 @@ function ActivityCard ({location, setCurrentUser, currentUser, reviewLocationId,
   return (
     <div className="activity-card">
       <h1 className="act-card-header" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{location.location_name}</h1>
+      {age === null ?
+        null :
+      <h2 className="act-card-rating" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{age}: {ratingAverage.toFixed(1)}</h2>}
       <img src={location.photo} alt={location.location_name} className='activity-photo'/>
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         {location.outdoor === true ? <text className='emoji'>🌳</text> : null}

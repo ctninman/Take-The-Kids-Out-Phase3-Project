@@ -16,6 +16,7 @@ function FreeActivities ({currentUser, selectedCity, setCurrentUser, reviewLocat
        <ActivityCard 
         key={location.id}
         currentUser={currentUser} 
+        age={null}
         setCurrentUser={setCurrentUser} 
         location={location}
         reviewLocationId={reviewLocationId}

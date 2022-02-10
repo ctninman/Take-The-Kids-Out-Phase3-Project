@@ -10,7 +10,8 @@ function ToddlerActivities ({currentUser, setCurrentUser, selectedCity, reviewLo
     fetch(`http://localhost:9293//cities/${selectedCity.id}/locations/toddler`)
     .then(res => res.json())
     .then(data => {
-      setToddlerActivities(data)
+      let sortedActivities = data.sort(data.average_toddler_rating)
+      setToddlerActivities(sortedActivities.reverse())
     })
   }, [] )
 
@@ -22,6 +23,8 @@ function ToddlerActivities ({currentUser, setCurrentUser, selectedCity, reviewLo
       {toddlerActivities.map((location) => (
        <ActivityCard 
         key={location.id}
+        ratingAverage={location.average_toddler_rating}
+        age="Toddler Rating"
         currentUser={currentUser} 
         setCurrentUser={setCurrentUser} 
         location={location}

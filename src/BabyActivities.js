@@ -10,7 +10,8 @@ function BabyActivities ({selectedCity, currentUser, setCurrentUser, reviewLocat
     fetch(`http://localhost:9293//cities/${selectedCity.id}/locations/baby`)
     .then(res => res.json())
     .then(data => {
-      setBabyActivities(data)
+      let sortedActivities = data.sort(data.average_baby_rating)
+      setBabyActivities(sortedActivities.reverse())
     })
   }, [] )
 
@@ -22,6 +23,8 @@ function BabyActivities ({selectedCity, currentUser, setCurrentUser, reviewLocat
       {babyActivities.map((location) => (
        <ActivityCard 
         key={location.id}
+        ratingAverage={location.average_baby_rating}
+        age="Baby Rating"
         currentUser={currentUser} 
         setCurrentUser={setCurrentUser} 
         location={location}

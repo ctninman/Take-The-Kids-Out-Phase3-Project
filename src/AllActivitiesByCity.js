@@ -1,9 +1,19 @@
 import ActivityCard from "./ActivityCard"
 import CityNavBar from "./CityNavBar"
+import {useState, useEffect} from 'react'
 
 function AllActivitiesByCity ({currentUser, setCurrentUser, selectedCity, reviewLocationId, setReviewLocationId}) {
 
-  const currentCityLocations = selectedCity.locations.filter((location) => location.city_id === selectedCity.id)
+  const [allLocations, setAllLocations] = useState([])
+
+  useEffect (() => {
+    fetch(`http://localhost:9293//cities/${selectedCity.id}/locations`)
+    .then(res => res.json())
+    .then(data => {
+      let sortedLocations = data.sort(data.average_general_rating)
+      setAllLocations(sortedLocations.reverse())
+    })
+  }, [] )
 
   return(
     <div>
@@ -12,9 +22,11 @@ function AllActivitiesByCity ({currentUser, setCurrentUser, selectedCity, review
       </div>
       <CityNavBar />
       <div className='activity-card-container'>
-      {currentCityLocations.map((location) => (
+      {allLocations.map((location) => (
        <ActivityCard 
         key={location.id}
+        ratingAverage={location.average_general_rating}
+        age="Overall Rating"
         location={location} 
         setCurrentUser={setCurrentUser} 
         currentUser={currentUser}

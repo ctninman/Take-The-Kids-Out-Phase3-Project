@@ -13,6 +13,7 @@ function OutdoorActivities ({currentUser, setCurrentUser, selectedCity, reviewLo
      {outdoorLocations.map((location) => (
        <ActivityCard 
         key={location.id}
+        age={null}
         currentUser={currentUser} 
         setCurrentUser={setCurrentUser} 
         location={location}

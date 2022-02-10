@@ -124,6 +124,20 @@ code {
   border: 2px solid #022873;
 }
 
+.act-card-rating {
+  display: flex;
+  /* border: solid 10px #04BF9D;  */
+  flex-direction:column;
+  justify-content: center;
+  background-color: white; 
+  color: #D95276;
+  border-radius: 10px; 
+  margin-left: 25px;
+  margin-right: 25px; 
+  padding: 5px;
+  border: 2px solid #022873;
+}
+
 .favorite-button {
   font-family: 'Supermercado One', cursive;
   background-color: white;
