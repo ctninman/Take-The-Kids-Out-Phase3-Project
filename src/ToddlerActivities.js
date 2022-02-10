@@ -11,7 +11,7 @@ function ToddlerActivities ({currentUser, setCurrentUser, selectedCity, reviewLo
     .then(res => res.json())
     .then(data => {
       let sortedActivities = data.sort(data.average_toddler_rating)
-      setToddlerActivities(sortedActivities.reverse())
+      setToddlerActivities(sortedActivities)
     })
   }, [] )
 

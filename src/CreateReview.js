@@ -63,15 +63,14 @@ function CreateReview ({currentUser, setCurrentUser, reviewLocationId}) {
       preschool_rating: 2,
       school_age_rating: 3,
       adult_rating: 4,
-      general_rating: 5,
-      educational_value: 5
+      general_rating: 5
     }
     console.log('newac', newReview)
     postNewReview(newReview)
     history.goBack()
   }
 
-
+  // onClick={onRatingClick} 
 
   return (currentUser === '') ?
     <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
@@ -93,7 +92,7 @@ function CreateReview ({currentUser, setCurrentUser, reviewLocationId}) {
         </input>
         <div style={{display: 'flex', flexDirection: 'row'}}>
           <label>Rating for Babies (0-12 Months)</label>
-          <input onClick={onRatingClick} name='baby' type='radio' value={1} /> 1
+          <input name='baby' type='radio' value={1} /> 1
           <input name='baby' type='radio' value={2} /> 2
           <input name='baby' type='radio' value={3} /> 3
           <input name='baby' type='radio' value={4} /> 4
