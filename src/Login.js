@@ -1,11 +1,17 @@
 import { Route, Switch, NavLink } from 'react-router-dom'
+import { useHistory } from 'react-router'
+import { useContext } from 'react'
 import MyReviews from './MyReviews'
-import PlacesToVisit from './PlacesToVisit'
 import ViewFavorites from './ViewFavorites'
 import UpdateUser from './UpdateUser'
 import UserNavBar from './UserNavBar'
+import { UserContext } from './UserContext'
 
-function Login ({currentUser, setSelectedCity}) {
+function Login ({setSelectedCity}) {
+
+  let history = useHistory()
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
 
   const loginLinkStyles = {
     display: "inline-block",
@@ -18,8 +24,8 @@ function Login ({currentUser, setSelectedCity}) {
     borderRadius: '5px'
   };
 
-  function fetchUser () {
-
+  function handleCitySelect (event) {
+    history.push('/city')
   }
 
   return (currentUser === '' || currentUser === null) ?
@@ -74,15 +80,23 @@ function Login ({currentUser, setSelectedCity}) {
           <h1>You have written {currentUser.reviews.length} reviews.</h1>
         </div>
         <div style={{display: 'flex', justifyContent: 'center'}}>
-        <NavLink 
+        {/* <NavLink 
           to="/city" 
           onClick={() => setSelectedCity(currentUser.city)}
           exact
           // style={loginLinkStyles}  
           className='user-nav-bar'
-          style={{background: "#022873", color: 'white'}}
+          style={{backgroundImage: `url(${currentUser.city.photo})`, backgroundSize: '100%', fontWeight: 'bolder', fontSize: '25px'}}
+          // style={{background: "#022873", color: 'white'}}
           >Explore My City
-        </NavLink>
+        </NavLink> */}
+        <button
+          onClick={handleCitySelect} 
+          className='city-card'
+          value={currentUser.city.city_name}
+          style={{backgroundImage: `url(${currentUser.city.photo})`, backgroundSize: '100%', fontWeight: 'bolder', fontSize: '25px'}}
+          >Explore My City
+       </button>
         </div>
       </div>
       

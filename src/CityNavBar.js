@@ -2,23 +2,6 @@ import { NavLink } from "react-router-dom";
 
 function CityNavBar () {
 
-  const cityLinkStyles = {
-    // display: "flex",
-    // alignItems: 'center',
-    // justifyContent: 'center',
-    // padding: "12px",
-    // margin: "0 6px 6px",
-    // background: "#D95276",
-    // textDecoration: "none",
-    // color: "white",
-    // borderRadius: '5px',
-    // height: '28px',
-    // width: '75px',
-    // textAlign: 'center',
-    // // margin: 'auto',
-
-  };
-
   return (
     <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent:'space-between', marginTop: '3px', marginBottom: '3px'}}>
       <NavLink 

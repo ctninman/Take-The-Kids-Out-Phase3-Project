@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import ActivityCard from "./ActivityCard";
 import CityNavBar from "./CityNavBar";
+import { UserContext } from './UserContext'
 
-function OutdoorActivities ({currentUser, setCurrentUser, selectedCity, reviewLocationId, setReviewLocationId}) {
+function OutdoorActivities ({selectedCity, reviewLocationId, setReviewLocationId}) {
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
   
   const outdoorLocations = selectedCity.locations.filter ((location) => location.city_id === selectedCity.id && location.outdoor === true);
 
@@ -14,8 +18,6 @@ function OutdoorActivities ({currentUser, setCurrentUser, selectedCity, reviewLo
        <ActivityCard 
         key={location.id}
         age={null}
-        currentUser={currentUser} 
-        setCurrentUser={setCurrentUser} 
         location={location}
         reviewLocationId={reviewLocationId}
         setReviewLocationId={setReviewLocationId}/>

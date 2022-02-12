@@ -1,7 +1,10 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect, useRef, useContext} from 'react'
 import {useHistory} from 'react-router-dom'
+import { UserContext } from './UserContext'
 
-function UserActivityCard ({setCurrentUser, currentUser, userFavorite, filteredFavorites, setFilteredFavorites, setReviewLocationId, reviewLocationId}) {
+function UserActivityCard ({userFavorite, filteredFavorites, setFilteredFavorites, setReviewLocationId, reviewLocationId}) {
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
 
   // let verifiedUser = (currentUser != '') ? currentUser.favorites.find((favorite) => favorite.location_id === location.id) : null
  
@@ -78,7 +81,7 @@ function deleteUserFavorite (id) {
   }
 
   function handleClickAddReview () {
-    setReviewLocationId(userFavorite.id)
+    setReviewLocationId(userFavorite.location_id)
     history.push('/write_review')
   }
 

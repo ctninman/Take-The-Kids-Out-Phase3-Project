@@ -1,8 +1,11 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import ActivityCard from './ActivityCard'
 import CityNavBar from './CityNavBar'
+import { UserContext } from './UserContext'
 
-function SchoolAgeActivities ({currentUser, setCurrentUser, selectedCity, reviewLocationId, setReviewLocationId}) {
+function SchoolAgeActivities ({selectedCity, reviewLocationId, setReviewLocationId}) {
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
 
   const [schoolAgeActivities, setSchoolAgeActivities] = useState([])
 
@@ -25,8 +28,6 @@ function SchoolAgeActivities ({currentUser, setCurrentUser, selectedCity, review
         key={location.id}
         ratingAverage={location.average_school_age_rating}
         age="School-Age Rating"
-        currentUser={currentUser} 
-        setCurrentUser={setCurrentUser} 
         location={location}
         reviewLocationId={reviewLocationId}
         setReviewLocationId={setReviewLocationId}/>

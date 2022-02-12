@@ -1,8 +1,11 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import UserActivityCard from './UserActivityCard'
 import UserNavBar from './UserNavBar'
+import { UserContext } from './UserContext'
 
-function ViewFavorites ({currentUser, setCurrentUser, reviewLocationId, setReviewLocationId}) {
+function ViewFavorites ({reviewLocationId, setReviewLocationId}) {
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
 
   const [filteredFavorites, setFilteredFavorites] = useState(currentUser.favorites)
   const [favoritesHeader, setFavoritesHeader] = useState('All My Places')

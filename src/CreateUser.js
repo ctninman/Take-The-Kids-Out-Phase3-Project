@@ -1,7 +1,10 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import {useHistory} from 'react-router'
+import { UserContext } from './UserContext'
 
-function CreateUser ({currentUser, setCurrentUser}) {
+function CreateUser () {
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
 
 
   const [newUserName, setNewUserName] = useState(null)

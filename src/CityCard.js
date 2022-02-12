@@ -21,6 +21,7 @@ function CityCard ({city, selectedCity, setSelectedCity}) {
         onClick={handleCitySelect} 
         className='city-card'
         value={city.city_name}
+        style={{backgroundImage: `url(${city.photo})`, backgroundSize: '100%', fontWeight: 'bolder', fontSize: '25px'}}
         >{city.city_name}
       </button>
     </div>

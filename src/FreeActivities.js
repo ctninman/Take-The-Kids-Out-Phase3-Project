@@ -1,8 +1,12 @@
 import ActivityCard from './ActivityCard'
-import {useEffect} from 'react'
+import {useEffect, useContext} from 'react'
 import CityNavBar from './CityNavBar';
+import { UserContext } from './UserContext'
 
-function FreeActivities ({currentUser, selectedCity, setCurrentUser, reviewLocationId, setReviewLocationId}) {
+
+function FreeActivities ({selectedCity, reviewLocationId, setReviewLocationId}) {
+  
+  const {currentUser, setCurrentUser} = useContext(UserContext)
 
   const freeLocations = selectedCity.locations.filter ((location) => location.city_id === selectedCity.id && location.free === true);
 
@@ -15,9 +19,7 @@ function FreeActivities ({currentUser, selectedCity, setCurrentUser, reviewLocat
       {freeLocations.map((location) => (
        <ActivityCard 
         key={location.id}
-        currentUser={currentUser} 
         age={null}
-        setCurrentUser={setCurrentUser} 
         location={location}
         reviewLocationId={reviewLocationId}
         setReviewLocationId={setReviewLocationId}/>

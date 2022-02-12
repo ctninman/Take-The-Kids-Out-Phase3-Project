@@ -1,9 +1,11 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
 import ActivityCard from './ActivityCard'
 import CityNavBar from './CityNavBar'
+import { UserContext } from './UserContext'
 
-function BabyActivities ({selectedCity, currentUser, setCurrentUser, reviewLocationId, setReviewLocationId}) {
+function BabyActivities ({selectedCity, reviewLocationId, setReviewLocationId}) {
 
+  const {currentUser, setCurrentUser} = useContext(UserContext)
   const [babyActivities, setBabyActivities] = useState([])
 
   useEffect (() => {
@@ -25,8 +27,6 @@ function BabyActivities ({selectedCity, currentUser, setCurrentUser, reviewLocat
         key={location.id}
         ratingAverage={location.average_baby_rating}
         age="Baby Rating"
-        currentUser={currentUser} 
-        setCurrentUser={setCurrentUser} 
         location={location}
         reviewLocationId={reviewLocationId}
         setReviewLocationId={setReviewLocationId}/>

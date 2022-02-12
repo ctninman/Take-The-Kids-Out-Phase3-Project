@@ -1,9 +1,12 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import { useHistory } from 'react-router'
 import CityNavBar from './CityNavBar'
+import { UserContext } from './UserContext'
 import './Form.css'
 
-function AddActivity ({selectedCity, setSelectedCity, currentUser}) {
+function AddActivity ({selectedCity, setSelectedCity}) {
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
 
   let history = useHistory()
 

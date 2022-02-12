@@ -1,7 +1,10 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useContext } from "react"
 import {useHistory} from 'react-router'
+import { UserContext } from './UserContext'
 
-function ActivityCard ({location, setCurrentUser, currentUser, reviewLocationId, setReviewLocationId, ratingAverage, age}) {
+function ActivityCard ({location, reviewLocationId, setReviewLocationId, ratingAverage, age}) {
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
 
   let verifiedUser = (currentUser != '') ? currentUser.favorites.find((favorite) => favorite.location_id === location.id) : null
  
@@ -142,7 +145,6 @@ function ActivityCard ({location, setCurrentUser, currentUser, reviewLocationId,
         <p ><text style={{ fontWeight: 'bold', fontStyle: 'italic'}}>Description: </text>{location.description}</p>
         <p ><text style={{ fontWeight: 'bold', fontStyle: 'italic'}}>Address: </text>{location.address}</p>
         <p ><text style={{ fontWeight: 'bold', fontStyle: 'italic'}}>Neighborhood: </text>{location.neighborhood}</p>
-        <p></p>
       </div>
       <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
         {isFavorite 

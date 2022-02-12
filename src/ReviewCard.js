@@ -1,6 +1,9 @@
-import {useState, useEffect, useRef} from 'react'
+import {useState, useEffect, useRef, useContext} from 'react'
+import { UserContext } from './UserContext'
 
-function ReviewCard ({currentUser, setCurrentUser, review}) {
+function ReviewCard ({review}) {
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
 
   const [reviewIsVisible, setReviewIsVisible] = useState(true)
   const [toggleCheckDelete, setToggleCheckDelete] = useState(false)

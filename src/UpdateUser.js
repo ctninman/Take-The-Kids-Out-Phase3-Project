@@ -1,7 +1,10 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import {useHistory} from 'react-router-dom'
+import { UserContext } from './UserContext'
 
-function UpdateUser ({setCurrentUser, currentUser}) {
+function UpdateUser () {
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
   
   let history = useHistory()
   

@@ -1,5 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { useHistory } from 'react-router';
+import { useContext } from 'react';
+import { UserContext } from './UserContext'
 
 const linkStyles = {
   display: "inline-block",
@@ -13,7 +15,9 @@ const linkStyles = {
   // margin: 'auto'
 };
 
-function NavBar({currentUser, setCurrentUser}) {
+function NavBar() {
+
+  const {currentUser, setCurrentUser} = useContext(UserContext)
 
   let history = useHistory()
 
@@ -56,7 +60,8 @@ function NavBar({currentUser, setCurrentUser}) {
         </div>
         
         <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
-          <button className='login-button' onClick={() => console.log(currentUser)}>Current User</button>
+          <div style={{width: '75px'}}></div>
+          {/* <button className='login-button' onClick={() => console.log(currentUser)}>Current User</button> */}
           <button className='login-button' onClick={() => history.push('/')}>Sign In</button>
           <button className='login-button' onClick={() => setCurrentUser('')}>Sign Out</button>
         </div>

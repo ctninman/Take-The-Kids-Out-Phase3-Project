@@ -11,7 +11,8 @@
 }
 
 .activity-form button {
-  font-family: 'Supermercado One', cursive;
+  /* font-family: 'Supermercado One', cursive; */
+  font-family: 'Gideon Roman', cursive;
   background-color: #022873;
   color: white;
   width: 150px;
@@ -20,5 +21,30 @@
   margin: 3px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
+
+.review-form {
+  display: flex;
+  border: solid 10px #F29F05; 
+  flex-flow: column wrap;
+  justify-content: center;
+  background-color: #F2CB05; 
+  border-radius: 10px; 
+  margin: 10px; 
+  padding: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.review-form button {
+  /* font-family: 'Supermercado One', cursive; */
+  font-family: 'Gideon Roman', cursive;
+  background-color: #022873;
+  color: white;
+  width: 150px;
+  border-radius: 3px;
+  height: 25px;
+  margin: 3px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
 
 
