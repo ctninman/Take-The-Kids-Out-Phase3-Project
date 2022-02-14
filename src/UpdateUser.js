@@ -50,7 +50,8 @@ function UpdateUser () {
       user_name: formUserName,
       password: formUserPassword,
       city_id: formUserCity,
-      photo: formUserPhoto
+      photo: formUserPhoto,
+      email: formUserEmail
     }
     patchUpdatedUser(updatedUser)
     history.push('/user')
