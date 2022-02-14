@@ -1,12 +1,10 @@
 import ActivityCard from "./ActivityCard"
 import CityNavBar from "./CityNavBar"
-import {useState, useEffect, useContext} from 'react'
-import { UserContext } from './UserContext'
+import {useState, useEffect} from 'react'
 import AllReviewsOneLocation from "./AllReviewsOneLocation"
 
 function AllActivitiesByCity ({selectedCity, reviewLocationId, setReviewLocationId}) {
 
-  const {currentUser, setCurrentUser} = useContext(UserContext)
   const [viewAllLocationReviews, setViewAllLocationReviews] = useState(false)
   const [allLocations, setAllLocations] = useState([])
 
@@ -18,7 +16,8 @@ function AllActivitiesByCity ({selectedCity, reviewLocationId, setReviewLocation
       setAllLocations(sortedLocations.reverse())
     })
   }, [] )
-
+  
+    // *** JSX *** //
   return viewAllLocationReviews === false ?
     <div>
       <div>

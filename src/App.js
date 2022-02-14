@@ -29,7 +29,6 @@ function App() {
   const [selectedCity, setSelectedCity] = useState ('')
   const [login, setLogin] = useState('')
   const [password, setPassword] = useState('')
-  // const [userReviews, setUserReviews] = useState('')
 
   let history = useHistory()
 
@@ -37,22 +36,9 @@ function App() {
     fetch('http://localhost:9293/cities')
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       setCities(data)
     })
   }, [] )
-
-  // useEffect (() => {
-  //   if (currentUser != ""){
-  //     fetch(`http://localhost:9293/users/${currentUser.id}/reviews`)
-  //     .then(res => res.json())
-  //     .then(data => {
-  //       console.log('rev', data)
-  //       let filteredByFavorites = data.filter((review) => review.favorite === true)
-  //       console.log('filrev', filteredByFavorites)
-  //       setUserReviews(data)
-  //   })}
-  // }, [currentUser] )
 
   function enterUserName (event) {
     event.preventDefault()
@@ -75,6 +61,7 @@ function App() {
 
   // <Route exact path='/user' component={() => <Login />} />
 
+    // *** JSX *** //
   return (
     <div className="App">
       <UserContext.Provider value={{currentUser, setCurrentUser}}> 

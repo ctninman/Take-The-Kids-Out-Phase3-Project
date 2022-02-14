@@ -4,8 +4,7 @@ import { UserContext } from './UserContext'
 
 function CreateUser () {
 
-  const {currentUser, setCurrentUser} = useContext(UserContext)
-
+  const {setCurrentUser} = useContext(UserContext)
 
   const [newUserName, setNewUserName] = useState(null)
   const [newUserPassword, setNewUserPassword] = useState(null)
@@ -44,14 +43,11 @@ function CreateUser () {
       .then((res) => res.json())
       .then((data) => {
         setCurrentUser(data)
-        console.log('data', data)
-        console.log('cu', currentUser)
       })
   }
 
   function handleUserSubmit(event) {
     event.preventDefault()
-    console.log('newuser', newUserName)
     let newUser = {
       user_name: newUserName,
       password: newUserPassword,
@@ -59,13 +55,11 @@ function CreateUser () {
       photo: newUserPhoto,
       number_of_kids: newUserKids
     }
-    console.log('newac', newUser)
     postNewUser(newUser)
     history.push('/user')
   }
 
-
-
+    // *** JSX *** //
   return (
     <div>
       <h1>Create User</h1>

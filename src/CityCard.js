@@ -1,15 +1,16 @@
-import { useHistory, Route } from 'react-router-dom'
+import { useHistory} from 'react-router-dom'
 
 
-function CityCard ({city, selectedCity, setSelectedCity}) {
+function CityCard ({city, setSelectedCity}) {
 
   let history = useHistory()
 
-  function handleCitySelect (event) {
+  function handleCitySelect () {
     setSelectedCity(city)
     history.push('/city')
   }
-
+  
+    // *** JSX *** //
   return (
     <div>
       <button

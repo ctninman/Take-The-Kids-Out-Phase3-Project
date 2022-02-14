@@ -1,18 +1,16 @@
 import ActivityCard from './ActivityCard'
-import {useEffect, useState, useContext} from 'react'
+import {useState} from 'react'
 import CityNavBar from './CityNavBar';
-import { UserContext } from './UserContext'
 import AllReviewsOneLocation from './AllReviewsOneLocation';
 
 
 function FreeActivities ({selectedCity, reviewLocationId, setReviewLocationId}) {
   
-  const {currentUser, setCurrentUser} = useContext(UserContext)
   const [viewFreeLocationReviews, setViewFreeLocationReviews] = useState(false)
 
   const freeLocations = selectedCity.locations.filter ((location) => location.city_id === selectedCity.id && location.free === true);
 
-
+    // *** JSX *** //
   return viewFreeLocationReviews === false ?
     <div>
       <h1 className="act-card-section">Free Activities in {selectedCity.city_name}</h1>

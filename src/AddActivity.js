@@ -92,7 +92,8 @@ function AddActivity ({selectedCity, setSelectedCity}) {
       history.push('/city/all')
     }
   }
-
+  
+    // *** JSX *** //
   return (currentUser === '') ?
   <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
     :

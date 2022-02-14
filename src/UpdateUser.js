@@ -12,7 +12,6 @@ function UpdateUser () {
   const [formUserEmail, setFormUserEmail] = useState(currentUser.email)
   const [formUserPassword, setFormUserPassword] = useState(currentUser.password)
   const [formUserCity, setFormUserCity] = useState(currentUser.city_id)
-  // const [formUserKids, setFormUserKids] = useState(null)
   const [formUserPhoto, setFormUserPhoto] = useState(currentUser.photo)
 
   function onUserNameChange (event) {
@@ -31,10 +30,6 @@ function UpdateUser () {
     setFormUserEmail(event.target.value)
   }
 
-  // function onUserKidsChange (event) {
-  //   setFormUserKids(event.target.value)
-  // }
-
   function onUserPhotoChange (event) {
     setFormUserPhoto(event.target.value)
   }
@@ -51,21 +46,17 @@ function UpdateUser () {
 
   function handleUserUpdate(event) {
     event.preventDefault()
-    // console.log('newuser', newUserName)
     let updatedUser = {
       user_name: formUserName,
       password: formUserPassword,
       city_id: formUserCity,
       photo: formUserPhoto
-      // number_of_kids: formUserKids
     }
-    console.log('newac', updatedUser)
     patchUpdatedUser(updatedUser)
     history.push('/user')
   }
 
-
-
+    // *** JSX *** //
   return currentUser === "" ?
   <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
       :

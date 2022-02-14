@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import {NavLink} from 'react-router-dom'
 import CityCard from './CityCard';
 import CityNavBar from './CityNavBar';
 
-function Cities ({selectedCity, setSelectedCity, cities, setCities}) {
+function Cities ({selectedCity, setSelectedCity, cities}) {
 
   const [highestBabyRating, setHighestBabyRating] = useState ({})
   const [highestToddlerRating, setHighestToddlerRating] = useState ({})
@@ -11,19 +10,11 @@ function Cities ({selectedCity, setSelectedCity, cities, setCities}) {
   const [highestSchoolAgeRating, setHighestSchoolAgeRating] = useState ({})
   const [highestAdultRating, setHighestAdultRating] = useState ({})
 
-  // useEffect (() => {
-  //   if (selectedCity === '') {
-
-  //   }
-  // })
-
   useEffect (() => {
     if (selectedCity != '') {
       fetch(`http://localhost:9293/cities/${selectedCity.id}/locations`)
       .then(res => res.json())
       .then(locations => {
-        console.log(locations);
-        // setHighestBabyRating(data.)
         setHighestBabyRating(locations.reduce((max, location) => max.average_baby_rating > location.average_baby_rating ? max : location))
         setHighestToddlerRating(locations.reduce((max, location) => max.average_toddler_rating > location.average_toddler_rating ? max : location))
         setHighestPreschoolRating(locations.reduce((max, location) => max.average_preschool_rating > location.average_preschool_rating ? max : location))
@@ -32,18 +23,8 @@ function Cities ({selectedCity, setSelectedCity, cities, setCities}) {
       })
     }
   }, [selectedCity] )
-
-  const loginLinkStyles = {
-    display: "inline-block",
-    width: "70px",
-    padding: "12px",
-    margin: "0 6px 6px",
-    background: "#609240",
-    textDecoration: "none",
-    color: "white",
-    borderRadius: '5px'
-  };
-
+  
+    // *** JSX *** //
   return (selectedCity === "") ?
     <>
       <h1 style={{textAlign: 'center', fontSize: '40px'}}>Select a city:</h1>

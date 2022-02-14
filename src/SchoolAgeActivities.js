@@ -1,12 +1,9 @@
-import {useState, useEffect, useContext} from 'react'
+import {useState, useEffect} from 'react'
 import ActivityCard from './ActivityCard'
 import AllReviewsOneLocation from './AllReviewsOneLocation'
 import CityNavBar from './CityNavBar'
-import { UserContext } from './UserContext'
 
 function SchoolAgeActivities ({selectedCity, reviewLocationId, setReviewLocationId}) {
-
-  const {currentUser, setCurrentUser} = useContext(UserContext)
 
   const [schoolAgeActivities, setSchoolAgeActivities] = useState([])
   const [viewSchoolAgeLocationReviews, setViewSchoolAgeLocationReviews] = useState(false)
@@ -19,7 +16,8 @@ function SchoolAgeActivities ({selectedCity, reviewLocationId, setReviewLocation
       setSchoolAgeActivities(sortedActivities.reverse())
     })
   }, [] )
-
+  
+    // *** JSX *** //
   return viewSchoolAgeLocationReviews === false ?
     <div>
       <h1 className="act-card-section">School-Age Activities in {selectedCity.city_name}</h1>

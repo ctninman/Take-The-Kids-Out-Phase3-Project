@@ -1,12 +1,9 @@
-import {useState, useEffect, useContext} from 'react'
+import {useState, useEffect} from 'react'
 import ActivityCard from './ActivityCard'
 import AllReviewsOneLocation from './AllReviewsOneLocation'
 import CityNavBar from './CityNavBar'
-import { UserContext } from './UserContext'
 
 function AdultActivities ({selectedCity, reviewLocationId, setReviewLocationId}) {
-
-  const {currentUser, setCurrentUser} = useContext(UserContext)
   
   const [adultActivities, setAdultActivities] = useState([])
   const [viewAdultLocationReviews, setViewAdultLocationReviews] = useState(false)
@@ -19,7 +16,8 @@ function AdultActivities ({selectedCity, reviewLocationId, setReviewLocationId})
       setAdultActivities(sortedActivities.reverse())
     })
   }, [] )
-
+  
+    // *** JSX *** //
   return viewAdultLocationReviews === false ?
     <div>
       <h1 className="act-card-section">Also Enjoyable For Adults in {selectedCity.city_name}</h1>

@@ -9,12 +9,11 @@ function ViewFavorites ({reviewLocationId, setReviewLocationId}) {
     fetch(`http://localhost:9293/users/${currentUser.id}/favorites`)
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       setFilteredFavorites(data)
     })
   }, [] )
 
-  const {currentUser, setCurrentUser} = useContext(UserContext)
+  const {currentUser} = useContext(UserContext)
 
   const [filteredFavorites, setFilteredFavorites] = useState([])
   const [favoritesHeader, setFavoritesHeader] = useState('All My Places')
@@ -39,7 +38,7 @@ function ViewFavorites ({reviewLocationId, setReviewLocationId}) {
     setFavoritesHeader(event.target.value)
   }
 
-
+    // *** JSX *** //
   return(
     <div>
       <h1 className="act-card-section">{favoritesHeader}</h1>

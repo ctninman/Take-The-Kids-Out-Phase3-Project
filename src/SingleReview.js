@@ -1,6 +1,6 @@
 function SingleReview ({review}) {
+  
   return (
-
     <>
       <div className='single-review' style={{padding: '1px'}}> 
         <div style={{marginLeft: '15px'}}>

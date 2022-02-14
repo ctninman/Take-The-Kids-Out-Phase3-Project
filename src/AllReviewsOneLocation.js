@@ -9,11 +9,11 @@ function AllReviewsOneLocation ({reviewLocationId}) {
     fetch(`http://localhost:9293/locations/${reviewLocationId}`)
     .then(res => res.json())
     .then(data => {
-      console.log(data);
       setReviewLocation(data)
     })
   }, [] ) 
-
+  
+    // *** JSX *** //
   return (reviewLocation === null) ?
     <h1>Finding All Reviews...</h1>
       :
@@ -26,6 +26,9 @@ function AllReviewsOneLocation ({reviewLocationId}) {
           <img src={reviewLocation.photo} alt={reviewLocation.location_name} className='activity-photo'/>
         </div>
         <div style={{flexGrow: '4', padding: '10px', borderRadius: '10px', backgroundColor: 'white'}}>
+          {reviewLocation.average_general_rating === 0 ?
+          <h2>Has not been rated</h2>
+            :
           <div>
             <p className='rating'>Baby Rating: {reviewLocation.average_baby_rating.toFixed(1)}</p>
             <p className='rating'>Toddler Rating: {reviewLocation.average_toddler_rating.toFixed(1)}</p>
@@ -33,7 +36,8 @@ function AllReviewsOneLocation ({reviewLocationId}) {
             <p className='rating'>School-Age Rating: {reviewLocation.average_school_age_rating.toFixed(1)}</p>
             <p className='rating'>Adult Rating: {reviewLocation.average_adult_rating.toFixed(1)}</p>
             <p className='rating'>Overall Rating: {reviewLocation.average_general_rating.toFixed(1)}</p>
-          </div>
+          </div> 
+          }
        </div>
       </div>
 

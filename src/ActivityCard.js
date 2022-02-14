@@ -110,12 +110,13 @@ function ActivityCard ({location, setReviewLocationId, ratingAverage, age, setVi
     setViewLocationReviews(true)
   }
 
+    // *** JSX *** //
   return (
     <div className="activity-card">
       <h1 className="act-card-header" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{location.location_name}</h1>
       {age === null ?
         null :
-      <h2 className="act-card-rating" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{ratingAverage === 0 ? "No Ratings" : `${age}: ${ratingAverage.toFixed(1)}`}</h2>}
+      <h2 className="act-card-rating" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{ratingAverage === 0 ? "No Ratings" : `${age}: ${ratingAverage.toFixed(1)} / 5`}</h2>}
       <img src={location.photo} alt={location.location_name} className='activity-photo'/>
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         {location.outdoor === true ? <span className='emoji'>🌳</span> : null}

@@ -1,13 +1,13 @@
 import { NavLink } from "react-router-dom";
 
 function CityNavBar () {
-
+  
+    // *** JSX *** //
   return (
     <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent:'space-between', marginTop: '3px', marginBottom: '3px'}}>
       <NavLink 
           to="/city"  
           exact 
-          // style={cityLinkStyles} 
           className='city-nav-bar'
           activeStyle={{background: "#FB7498"}}
           >City Home
@@ -15,7 +15,6 @@ function CityNavBar () {
         <NavLink 
           to="/city/all" 
           exact
-          // style={cityLinkStyles} 
           className='city-nav-bar'
 
           activeStyle={{background: "#FB7498"}}
@@ -24,7 +23,6 @@ function CityNavBar () {
         <NavLink 
           to="/city/baby" 
           exact
-          // style={cityLinkStyles} 
           className='city-nav-bar' 
           activeStyle={{background: "#FB7498"}}
           >Babies
@@ -32,7 +30,6 @@ function CityNavBar () {
         <NavLink 
           to="/city/toddler" 
           exact
-          // style={cityLinkStyles} 
           className='city-nav-bar' 
           activeStyle={{background: "#FB7498"}}
           >Toddlers
@@ -40,7 +37,6 @@ function CityNavBar () {
         <NavLink 
           to="/city/preschool" 
           exact
-          // style={cityLinkStyles} 
           className='city-nav-bar' 
           activeStyle={{background: "#FB7498"}}
           >Pre-K
@@ -48,7 +44,6 @@ function CityNavBar () {
         <NavLink 
           to="/city/school-age" 
           exact
-          // style={cityLinkStyles} 
           className='city-nav-bar' 
           activeStyle={{background: "#FB7498"}}
           >School- Age
@@ -56,7 +51,6 @@ function CityNavBar () {
         <NavLink 
           to="/city/adult" 
           exact
-          // style={cityLinkStyles} 
           className='city-nav-bar'
           activeStyle={{background: "#FB7498"}}
           >Adults
@@ -64,7 +58,6 @@ function CityNavBar () {
         <NavLink 
           to="/city/free" 
           exact
-          // style={cityLinkStyles} 
           className='city-nav-bar' 
           activeStyle={{background: "#FB7498"}}
           >Free
@@ -72,7 +65,6 @@ function CityNavBar () {
         <NavLink 
           to="/city/outdoor" 
           exact
-          // style={cityLinkStyles} 
           className='city-nav-bar' 
           activeStyle={{background: "#FB7498"}}
           >Outdoor
@@ -80,7 +72,6 @@ function CityNavBar () {
         <NavLink 
           to="/city/add-activity" 
           exact
-          // style={cityLinkStyles} 
           className='city-nav-bar'
           activeStyle={{background: "#FB7498"}}
           >Add Activity

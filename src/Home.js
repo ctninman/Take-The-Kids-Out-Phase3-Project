@@ -19,7 +19,8 @@ function Home ({cities, selectedCity, setSelectedCity, setLogin, setPassword, en
   function beginAccountCreate () {
     history.push('/user/create')
   }
-
+  
+    // *** JSX *** //
   return currentUser === '' 
     ?
     <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>

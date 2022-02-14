@@ -26,32 +26,30 @@ function ReviewCard ({review}) {
     .then((data) => {
       let copyOfUser = {...currentUser}
       let copyOfReviews = currentUser.reviews.filter ((review) => review.id != data.id)
-      console.log('with removed review', copyOfReviews)
       copyOfUser.reviews = copyOfReviews
-      console.log('cou', copyOfUser);
       setCurrentUser(copyOfUser)
       setToggleCheckDelete(!toggleCheckDelete)
-      // setReviewIsVisible(false)
     })
   }
-
+  
+    // *** JSX *** //
   return reviewIsVisible 
       ?
     <div className="review-card" style={{display: 'flex', flexDirection: 'row', alignItems: 'flex-start'}}>
-      <div style={{width: '30%', display: 'flex', flexDirection: 'column', justifyContent: 'center', marginRight: '10px'}}>
+      <div style={{width: '38%', display: 'flex', flexDirection: 'column', justifyContent: 'center', marginRight: '10px'}}>
         <h1 className="act-card-header" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{review.location.location_name}</h1>
         <img src={review.location.photo} alt={review.location.location_name} className='activity-photo'/>
         <button className='delete-button' style={{marginTop: '5px'}} onClick={handleReviewDelete}>Delete Review</button>
       </div>
-      <div style={{flexGrow: '4', padding: '10px', borderRadius: '10px', backgroundColor: 'white'}}>
-        <h2>{review.review}</h2>
+      <div style={{flexGrow: '4', padding: '10px', borderRadius: '10px', width: '52%', backgroundColor: 'white'}}>
+        <p style={{fontSize: '20px'}}>{review.review}</p>
         <div>
-          <p className='rating'>Baby Rating: {"⭐".repeat(review.baby_rating)}</p>
-          <p className='rating'>Toddler Rating: {"⭐".repeat(review.toddler_rating)}</p>
-          <p className='rating'>Preschool Rating: {"⭐".repeat(review.preschool_rating)}</p>
-          <p className='rating'>School-Age Rating: {"⭐".repeat(review.school_age_rating)}</p>
-          <p className='rating'>Adult Rating: {"⭐".repeat(review.adult_rating)}</p>
-          <p className='rating'>Overall Rating: {"⭐".repeat(review.general_rating)}</p>
+          <div style={{display: 'flex', flexDirection: 'row'}}><p className='rating'>Baby Rating: </p><p className='rating'>{"⭐".repeat(review.baby_rating)}</p></div>
+          <div style={{display: 'flex', flexDirection: 'row'}}><p className='rating'>Toddler Rating: </p><p className='rating'>{"⭐".repeat(review.toddler_rating)}</p></div>
+          <div style={{display: 'flex', flexDirection: 'row'}}><p className='rating'>Preschool Rating: </p><p className='rating'>{"⭐".repeat(review.preschool_rating)}</p></div>
+          <div style={{display: 'flex', flexDirection: 'row'}}><p className='rating'>School-Age Rating: </p><p className='rating'>{"⭐".repeat(review.school_age_rating)}</p></div>
+          <div style={{display: 'flex', flexDirection: 'row'}}><p className='rating'>Adult Rating: </p><p className='rating'>{"⭐".repeat(review.adult_rating)}</p></div>
+          <div style={{display: 'flex', flexDirection: 'row'}}><p className='rating'>Overall Rating: </p><p className='rating'>{"⭐".repeat(review.general_rating)}</p></div>
         </div>
       </div>
     </div>

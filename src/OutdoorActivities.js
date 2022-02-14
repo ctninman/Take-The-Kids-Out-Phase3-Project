@@ -1,16 +1,15 @@
-import { useContext, useState } from "react";
+import {useState } from "react";
 import ActivityCard from "./ActivityCard";
 import AllReviewsOneLocation from "./AllReviewsOneLocation";
 import CityNavBar from "./CityNavBar";
-import { UserContext } from './UserContext'
 
 function OutdoorActivities ({selectedCity, reviewLocationId, setReviewLocationId}) {
 
-  const {currentUser, setCurrentUser} = useContext(UserContext)
   const [viewOutdoorLocationReviews, setViewOutdoorLocationReviews] = useState(false)
   
   const outdoorLocations = selectedCity.locations.filter ((location) => location.city_id === selectedCity.id && location.outdoor === true);
 
+    // *** JSX *** //
   return viewOutdoorLocationReviews === false ?
     <div>
       <h1 className="act-card-section">Outdoor Activities in {selectedCity.city_name}</h1>

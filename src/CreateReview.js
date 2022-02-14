@@ -44,7 +44,6 @@ function CreateReview ({reviewLocationId}) {
     })
       .then((res) => res.json())
       .then ((data) => {
-        console.log(data)
         let copyOfUser = {...currentUser}
         copyOfUser.reviews.push(data)
         setCurrentUser(data.user)
@@ -72,8 +71,7 @@ function CreateReview ({reviewLocationId}) {
     }
   }
 
-
-
+    // *** JSX *** //
   return (currentUser === '') ?
     <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
       :

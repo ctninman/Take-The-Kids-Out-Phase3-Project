@@ -1,12 +1,10 @@
-import {useState, useEffect, useContext} from 'react'
+import {useState, useEffect} from 'react'
 import ActivityCard from './ActivityCard'
 import AllReviewsOneLocation from './AllReviewsOneLocation'
 import CityNavBar from './CityNavBar'
-import { UserContext } from './UserContext'
 
 function BabyActivities ({selectedCity, reviewLocationId, setReviewLocationId}) {
 
-  const {currentUser, setCurrentUser} = useContext(UserContext)
   const [viewBabyLocationReviews, setViewBabyLocationReviews] = useState(false)
   const [babyActivities, setBabyActivities] = useState([])
 
@@ -18,7 +16,8 @@ function BabyActivities ({selectedCity, reviewLocationId, setReviewLocationId}) 
       setBabyActivities(sortedActivities.reverse())
     })
   }, [] )
-
+  
+    // *** JSX *** //
   return viewBabyLocationReviews === false ?
     <div>
       <h1 className="act-card-section">Baby Activities in {selectedCity.city_name}</h1>
