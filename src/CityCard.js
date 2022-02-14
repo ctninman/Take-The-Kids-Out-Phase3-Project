@@ -7,16 +7,11 @@ function CityCard ({city, selectedCity, setSelectedCity}) {
 
   function handleCitySelect (event) {
     setSelectedCity(city)
-    console.log(selectedCity)
     history.push('/city')
   }
 
   return (
-    <div 
-      // onClick={handleCitySelect} 
-      // style={{backgroundColor: 'orange', margin: '5px'}} 
-      // value={city.city_name}
-    >
+    <div>
       <button
         onClick={handleCitySelect} 
         className='city-card'

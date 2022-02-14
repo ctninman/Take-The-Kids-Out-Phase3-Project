@@ -1,18 +1,37 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import {NavLink} from 'react-router-dom'
 import CityCard from './CityCard';
 import CityNavBar from './CityNavBar';
 
 function Cities ({selectedCity, setSelectedCity, cities, setCities}) {
 
+  const [highestBabyRating, setHighestBabyRating] = useState ({})
+  const [highestToddlerRating, setHighestToddlerRating] = useState ({})
+  const [highestPreschoolRating, setHighestPreschoolRating] = useState ({})
+  const [highestSchoolAgeRating, setHighestSchoolAgeRating] = useState ({})
+  const [highestAdultRating, setHighestAdultRating] = useState ({})
+
+  // useEffect (() => {
+  //   if (selectedCity === '') {
+
+  //   }
+  // })
+
   useEffect (() => {
-    fetch('http://localhost:9293/cities')
-    .then(res => res.json())
-    .then(data => {
-      console.log(data);
-      setCities(data)
-    })
-  }, [] )
+    if (selectedCity != '') {
+      fetch(`http://localhost:9293/cities/${selectedCity.id}/locations`)
+      .then(res => res.json())
+      .then(locations => {
+        console.log(locations);
+        // setHighestBabyRating(data.)
+        setHighestBabyRating(locations.reduce((max, location) => max.average_baby_rating > location.average_baby_rating ? max : location))
+        setHighestToddlerRating(locations.reduce((max, location) => max.average_toddler_rating > location.average_toddler_rating ? max : location))
+        setHighestPreschoolRating(locations.reduce((max, location) => max.average_preschool_rating > location.average_preschool_rating ? max : location))
+        setHighestSchoolAgeRating(locations.reduce((max, location) => max.average_school_age_rating > location.average_school_age_rating ? max : location))
+        setHighestAdultRating(locations.reduce((max, location) => max.average_adult_rating > location.average_baby_rating ? max : location))
+      })
+    }
+  }, [selectedCity] )
 
   const loginLinkStyles = {
     display: "inline-block",
@@ -43,7 +62,19 @@ function Cities ({selectedCity, setSelectedCity, cities, setCities}) {
       <div className='cities-page'>
         <h1 className="act-card-section">Welcome to {selectedCity.city_name}</h1>
         <CityNavBar />
-        <img src={selectedCity.photo} alt={selectedCity.city_name} style={{width: '100%'}}/>
+        <div style={{display: 'flex', flexDirection: 'row'}}>
+          <div style={{width: '50%'}}>
+            <img src={selectedCity.photo} alt={selectedCity.city_name} style={{width: '95%', marginLeft: '5%', marginRight: '5%', borderRadius: '10%'}}/>
+          </div>
+          <div style={{width: '48%', padding: '15px'}}>
+            <h1 style={{marginTop: '0px', paddingTop: '0px', textAlign: 'center'}}>Highest Rated Activity for...</h1>
+            <h2><i>Babies:</i> {highestBabyRating.location_name}</h2>
+            <h2><i>Toddlers:</i> {highestToddlerRating.location_name}</h2>
+            <h2><i>Preschoolers:</i> {highestPreschoolRating.location_name}</h2>
+            <h2><i>School-Age:</i> {highestSchoolAgeRating.location_name}</h2>
+            <h2><i>Adults:</i> {highestAdultRating.location_name}</h2>
+          </div>
+        </div>
       </div>
     </>
 }

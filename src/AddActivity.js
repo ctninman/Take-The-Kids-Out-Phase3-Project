@@ -6,7 +6,7 @@ import './Form.css'
 
 function AddActivity ({selectedCity, setSelectedCity}) {
 
-  const {currentUser, setCurrentUser} = useContext(UserContext)
+  const {currentUser} = useContext(UserContext)
 
   let history = useHistory()
 
@@ -62,9 +62,7 @@ function AddActivity ({selectedCity, setSelectedCity}) {
       headers: {"Content-Type": "application/json",},
       body: JSON.stringify(object),
     })
-      .then((res) => {
-        return res.json()
-      })
+      .then((res) => res.json())
       .then ((data) => {
         let copyOfCity = {...selectedCity}
         copyOfCity.locations.push(data)
@@ -74,23 +72,25 @@ function AddActivity ({selectedCity, setSelectedCity}) {
 
   function handleSubmit(event) {
     event.preventDefault()
-    console.log('fan', formActivityName)
-    let newActivity = {
-      location_name: formActivityName,
-      city_id: selectedCity.id,
-      description: formDescription,
-      outdoor: formOutdoor,
-      indoor: formIndoor,
-      free: formFree,
-      address: formAddress,
-      borough: formBorough,
-      neighborhood: formNeighborhood,
-      activity_type: formType,
-      photo: 'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGFya3xlbnwwfHwwfHw%3D&w=1000&q=80'
+    if (formActivityName === null || formDescription === null || formAddress === null || formNeighborhood === null || formType === null) {
+      alert ('Please make sure you have entered all information.')
+    } else {
+      let newActivity = {
+        location_name: formActivityName,
+        city_id: selectedCity.id,
+        description: formDescription,
+        outdoor: formOutdoor,
+        indoor: formIndoor,
+        free: formFree,
+        address: formAddress,
+        borough: formBorough,
+        neighborhood: formNeighborhood,
+        activity_type: formType,
+        photo: 'https://images.unsplash.com/photo-1519331379826-f10be5486c6f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8cGFya3xlbnwwfHwwfHw%3D&w=1000&q=80'
+      }
+      postNewActivity(newActivity)
+      history.push('/city/all')
     }
-    console.log('newac', newActivity)
-    postNewActivity(newActivity)
-    history.push('/city/all')
   }
 
   return (currentUser === '') ?
@@ -101,106 +101,148 @@ function AddActivity ({selectedCity, setSelectedCity}) {
       <h1 className='act-card-section' >Add Activity to {selectedCity.city_name}</h1>
       <CityNavBar />
       <div style={{display: 'flex', justifyContent: 'center', marginLeft: '10%', marginRight: '10%'}}>
-        <form 
-          style={{display: 'flex', flexDirection:'column', margin: '10px', padding: '20px'}}
-          className='activity-form'
-          onSubmit={handleSubmit}>
-          <div>
-            <label>Activity/Location: </label>
-            <input 
-              name='activity_name'
-              type='text' 
-              onChange={onActivityNameChange}>
-            </input>
-          </div>
-          <div>
-            <label>Description:</label>
-            <input 
-              name='description'
-              type='text' 
-              onChange={onDescriptionChange}>
-            </input>
-          </div>
-          <div>
-          <label>Type of Activity?</label>
-          <select name={'types'} id={'types'} onChange={onTypeChange}>
-            <option value={null}>---</option>
-            <option value={'Playground/Park'}>Playground/Park</option>
-            <option value={'Nature'}>Nature</option>
-            <option value={'Museum'}>Museum</option>
-            <option value={'Store'}>Store</option>
-            <option value={'Class'}>Class</option>
-            <option value={'Art'}>Art</option>
-            <option value={'Music'}>Music</option>
-            <option value={'Dance'}>Dance</option>
-            <option value={'Library'}>Library</option>
-            <option value={'Sport'}>Sport</option>
-          </select>
-          </div>
-          <label>
-          <input
-            type="checkbox"
-            // checked={checked}
-            onChange={onOutdoorChange}
-          />
-          Outdoor activities?
-          </label>
-          <label>
-          <input
-            type="checkbox"
-            // checked={checked}
-            onChange={onIndoorChange}
-          />
-          Indoor activities?
-          </label>
-          <label>
-          <input
-            type="checkbox"
-            // checked={checked}
-            onChange={onFreeChange}
-          />
-          Free?
-          </label>
-          <div>
-            <label>Address: </label>
-            <input 
-              name='address'
-              type='text' 
-              onChange={onAddressChange}>
-            </input>
-          </div>
-          {selectedCity.city_name === 'New York City' 
-            ?
-          <div className='form-div'>
-          <label>Borough: </label>
-            <input 
-              name='borough'
-              type='text' 
-              onChange={onBoroughChange}>
-            </input>
-          </div>
-            :
-          null}
-          <div>
-          <label>Neighborhood</label>
-            <input 
-              name='neighborhood'
-              type='text' 
-              placeholder='Neighborhood'
-              onChange={onNeighborhoodChange}>
-            </input>
-          </div>
-          <div>
-            <button
-              type='submit'
-              value="Enter"
-              style={{marginTop: '2px'}} 
-              id='login-button'
-              text='Enter'>
-                Enter
-            </button>
-          </div>
-        </form>
+        <div style={{width: '80%'}}>
+          <form 
+            style={{display: 'flex', flexDirection:'column', margin: '10px', padding: '20px'}}
+            className='activity-form'
+            onSubmit={handleSubmit}>
+            <div style={{display: 'flex', flexDirection: 'row', marginBottom: '8px'}}>
+              <div style={{width: '30%', height: '28px', textAlign: 'right'}}>
+                <label>Activity / Location: </label>
+              </div>
+              <div style={{width: '65%'}}>
+                <input 
+                  style={{width: '100%'}}
+                  name='activity_name'
+                  type='text' 
+                  onChange={onActivityNameChange}>
+                </input>
+              </div>
+            </div>
+            
+            <div style={{display: 'flex', flexDirection: 'row', marginBottom: '8px'}}>
+              <div style={{width: '30%', textAlign: 'right'}}>
+                <label>Description:</label>
+              </div>
+              <div style={{width: '65%'}}>
+                <input 
+                  style={{width: '100%'}}
+                  name='description'
+                  type='text' 
+                  onChange={onDescriptionChange}>
+                </input>
+              </div>
+            </div>
+
+            <div style={{display: 'flex', flexDirection: 'row', marginBottom: '0px'}}>
+              <div style={{width: '30%', textAlign: 'right'}}>
+               <label>Type of Activity?</label>
+              </div>
+              <div style={{width: '65%'}}>
+                <select 
+                  name={'types'} 
+                  id={'types'} 
+                  style={{width: '50%', marginLeft: '10px', fontFamily: 'Gideon Roman', borderRadius: '3px'}} 
+                  onChange={onTypeChange}>
+                  <option value={null}>---</option>
+                  <option value={'Playground/Park'}>Playground/Park</option>
+                  <option value={'Nature'}>Nature</option>
+                  <option value={'Museum'}>Museum</option>
+                  <option value={'Store'}>Store</option>
+                  <option value={'Class'}>Class</option>
+                  <option value={'Art'}>Art</option>
+                  <option value={'Music'}>Music</option>
+                  <option value={'Dance'}>Dance</option>
+                  <option value={'Library'}>Library</option>
+                  <option value={'Sport'}>Sport</option>
+                </select>
+              </div>
+            </div>
+
+            <div style={{marginLeft: '30%'}}>
+              <label>
+              <input
+                type="checkbox"
+                onChange={onOutdoorChange}
+              />
+              Outdoor activities?
+              </label>
+            </div>
+            <div style={{marginLeft: '30%'}}>
+              <label>
+              <input
+                type="checkbox"
+                onChange={onIndoorChange}
+              />
+              Indoor activities?
+              </label>
+            </div>
+            <div style={{marginLeft: '30%'}}>
+              <label>
+              <input
+                type="checkbox"
+                onChange={onFreeChange}
+              />
+              Free?
+              </label>
+            </div>
+
+            <div style={{display: 'flex', flexDirection: 'row', marginBottom: '8px', marginTop: '8px'}}>
+              <div style={{width: '30%', textAlign: 'right'}}>
+                <label>Address: </label>
+              </div>
+              <div style={{width: '65%'}}>
+                <input 
+                  name='address'
+                  type='text' 
+                  onChange={onAddressChange}>
+                </input>
+              </div>
+            </div>
+            
+            {selectedCity.city_name === 'New York City' 
+              ?
+            <div style={{display: 'flex', flexDirection: 'row', marginBottom: '8px'}}>
+              <div className='form-div' style={{width: '30%', textAlign: 'right'}}> 
+                <label>Borough: </label>
+              </div>
+              <div style={{width: '65%'}}>
+                <input 
+                  name='borough'
+                  type='text' 
+                  onChange={onBoroughChange}>
+                </input>
+              </div>
+            </div>
+              :
+            null}
+           
+           <div style={{display: 'flex', flexDirection: 'row', marginBottom: '8px'}}>
+              <div className='form-div' style={{width: '30%', textAlign: 'right'}}> 
+                <label>Neighborhood</label>
+              </div>
+              <div style={{width: '65%'}}>
+                <input 
+                  name='neighborhood'
+                  type='text' 
+                  onChange={onNeighborhoodChange}>
+                </input>
+              </div>
+            </div>
+            <div>
+              <div style={{marginLeft: '30%'}}>
+                <button
+                  type='submit'
+                  value="Enter"
+                  style={{marginTop: '2px', marginLeft: '10px'}} 
+                  id='login-button'
+                  text='Enter'>
+                    Enter
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </>

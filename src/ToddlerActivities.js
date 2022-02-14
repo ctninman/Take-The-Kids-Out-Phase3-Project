@@ -1,5 +1,6 @@
 import {useState, useEffect, useContext} from 'react'
 import ActivityCard from './ActivityCard'
+import AllReviewsOneLocation from './AllReviewsOneLocation'
 import CityNavBar from './CityNavBar'
 import { UserContext } from './UserContext'
 
@@ -8,23 +9,25 @@ function ToddlerActivities ({selectedCity, reviewLocationId, setReviewLocationId
   const {currentUser, setCurrentUser} = useContext(UserContext)
 
   const [toddlerActivities, setToddlerActivities] = useState([])
+  const [viewToddlerLocationReviews, setViewToddlerLocationReviews] = useState(false)
 
   useEffect (() => {
-    fetch(`http://localhost:9293//cities/${selectedCity.id}/locations/toddler`)
+    fetch(`http://localhost:9293/cities/${selectedCity.id}/locations/toddler`)
     .then(res => res.json())
     .then(data => {
-      let sortedActivities = data.sort(data.average_toddler_rating)
+      let sortedActivities = data.sort((a, b) => (a.average_toddler_rating > b.average_toddler_rating) ? 1 : -1)
       setToddlerActivities(sortedActivities)
     })
   }, [] )
 
-  return(
+  return viewToddlerLocationReviews === false ?
     <div>
       <h1 className="act-card-section">Toddler Activities in {selectedCity.city_name}</h1>
       <CityNavBar />
       <div className='activity-card-container'>
       {toddlerActivities.map((location) => (
        <ActivityCard 
+        setViewLocationReviews={setViewToddlerLocationReviews}
         key={location.id}
         ratingAverage={location.average_toddler_rating}
         age="Toddler Rating"
@@ -34,7 +37,16 @@ function ToddlerActivities ({selectedCity, reviewLocationId, setReviewLocationId
      ))}
      </div>
     </div>
-  )
+      :
+    <>
+      <div style={{marginTop: '10px', marginLeft: '10px'}}>
+        <button className='return-button'
+        onClick={() => setViewToddlerLocationReviews(false)}>
+          Return to City
+        </button>
+      </div>
+      <AllReviewsOneLocation reviewLocationId={reviewLocationId}/>
+    </>
 }
 
 export default ToddlerActivities

@@ -20,7 +20,7 @@ function UserNavBar () {
       exact 
       // style={loginLinkStyles} 
       className='user-nav-bar'
-      activeStyle={{background: "#FB7498", color: 'black'}}
+      activeStyle={{background: "#FB7498"}}
       >User Home
     </NavLink>
     <NavLink 
@@ -28,7 +28,7 @@ function UserNavBar () {
       exact
       // style={loginLinkStyles} 
       className='user-nav-bar'
-      activeStyle={{background: "#FB7498", color: 'black'}}
+      activeStyle={{background: "#FB7498"}}
       >My Reviews
     </NavLink>
     <NavLink 
@@ -36,7 +36,7 @@ function UserNavBar () {
       exact
       // style={loginLinkStyles}  
       className='user-nav-bar'
-      activeStyle={{background: "#FB7498", color: 'black'}}
+      activeStyle={{background: "#FB7498"}}
       >My Favorites
     </NavLink>
     <NavLink 
@@ -44,7 +44,7 @@ function UserNavBar () {
       exact
       // style={loginLinkStyles}  
       className='user-nav-bar'
-      activeStyle={{background: "#FB7498", color: 'black'}}
+      activeStyle={{background: "#FB7498"}}
       >Update My Info
     </NavLink>
     </div>

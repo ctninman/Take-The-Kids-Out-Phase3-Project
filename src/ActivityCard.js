@@ -2,20 +2,16 @@ import { useState, useEffect, useRef, useContext } from "react"
 import {useHistory} from 'react-router'
 import { UserContext } from './UserContext'
 
-function ActivityCard ({location, reviewLocationId, setReviewLocationId, ratingAverage, age}) {
+function ActivityCard ({location, setReviewLocationId, ratingAverage, age, setViewLocationReviews}) {
 
   const {currentUser, setCurrentUser} = useContext(UserContext)
 
   let verifiedUser = (currentUser != '') ? currentUser.favorites.find((favorite) => favorite.location_id === location.id) : null
  
-  // let initialFavoriteState = (checkForLocationReview === undefined || currentUser === "") ? false : checkForLocationReview.favorite
-  // let initialToVisitState = (checkForLocationReview === undefined || currentUser === "") ? false : checkForLocationReview.want_to_visit
-  // let initialVisitedState = (checkForLocationReview === undefined || currentUser === "") ? false : checkForLocationReview.visited
-
   const [isFavorite, setIsFavorite] = useState((verifiedUser === null || verifiedUser === undefined) ? false : verifiedUser.favorite)
   const [toVisit, setToVisit] = useState((verifiedUser === null || verifiedUser === undefined) ? false : verifiedUser.want_to_visit)
   const [wasVisited, setWasVisited] = useState((verifiedUser === null || verifiedUser === undefined) ? false : verifiedUser.visited)
-  
+
   let history = useHistory()
 
   const firstUpdate = useRef(true);
@@ -32,7 +28,6 @@ function ActivityCard ({location, reviewLocationId, setReviewLocationId, ratingA
     if (foundFavorite && toVisit === false && wasVisited === false && isFavorite ===false) {
       deleteTheUserFavorite(foundFavorite.id)
     } else if (foundFavorite) {
-      console.log("ff", foundFavorite);
       let patchFavorite = {
         "favorite": isFavorite,
         "want_to_visit": toVisit,
@@ -57,13 +52,8 @@ function ActivityCard ({location, reviewLocationId, setReviewLocationId, ratingA
       headers: {"Content-Type": "application/json",},
       body: JSON.stringify(object),
     })
-      .then((res) => {
-        return res.json()
-      })
-      .then((data) => {
-        console.log('newpost', data);
-        setCurrentUser(data.user)
-      })
+      .then((res) => res.json())
+      .then((data) => setCurrentUser(data.user))
   }
 
   function patchUserFavorite (object, id) {  
@@ -75,10 +65,7 @@ function ActivityCard ({location, reviewLocationId, setReviewLocationId, ratingA
       .then((res) => {
         return res.json()
       })
-      .then((data) => {
-        console.log('patchy', data);
-        setCurrentUser(data.user)
-      })
+      .then((data) => setCurrentUser(data.user))
   }
 
   function deleteTheUserFavorite (id) {
@@ -89,24 +76,12 @@ function ActivityCard ({location, reviewLocationId, setReviewLocationId, ratingA
     .then((data) => setCurrentUser(data.user))
   }
 
-  // function alertNotSignedIn () {
-  //   if (verifiedUser === null) {
-  //     alert('You need to be signed in to access this feature')
-  //     return
-  //   }
-  // }
-
   function handleFavoriteClick () {
     if (verifiedUser === null) {
       alert('You need to be signed in to access this feature')
       return
     }
     setIsFavorite(!isFavorite)
-  }
-
-  function handleAddReview () {
-    setReviewLocationId(location.id)
-    history.push('/write_review')
   }
 
   function handleWantToGoClick () {
@@ -125,26 +100,34 @@ function ActivityCard ({location, reviewLocationId, setReviewLocationId, ratingA
     setWasVisited(!wasVisited)
   }
 
-  // style={{display: 'flex', border: '10px solid #04BF9D', borderWidth: '10px', flexDirection:'column', backgroundColor: 'white', borderRadius: '10px', margin: '20px', padding: '20px'}}
+  function handleAddReview () {
+    setReviewLocationId(location.id)
+    history.push('/write_review')
+  }
+
+  function handleViewReviews () {
+    setReviewLocationId(location.id)
+    setViewLocationReviews(true)
+  }
 
   return (
     <div className="activity-card">
       <h1 className="act-card-header" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{location.location_name}</h1>
       {age === null ?
         null :
-      <h2 className="act-card-rating" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{age}: {ratingAverage.toFixed(1)}</h2>}
+      <h2 className="act-card-rating" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{ratingAverage === 0 ? "No Ratings" : `${age}: ${ratingAverage.toFixed(1)}`}</h2>}
       <img src={location.photo} alt={location.location_name} className='activity-photo'/>
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-        {location.outdoor === true ? <text className='emoji'>🌳</text> : null}
-        {location.indoor === true ? <text className='emoji'>🏢</text> : null}
-        {location.free === true ? <text className='emoji'>🆓</text> : null}
+        {location.outdoor === true ? <span className='emoji'>🌳</span> : null}
+        {location.indoor === true ? <span className='emoji'>🏢</span> : null}
+        {location.free === true ? <span className='emoji'>🆓</span> : null}
         
       </div>
       <div style={{backgroundColor: 'white', borderRadius: '10%', marginTop: '3px', height: '250px', padding: '5px', border: '2px solid #022873'}}>
-        <p style={{textAlign: 'center', fontSize: 'larger'}}><text style={{ fontWeight: 'bold', fontStyle: 'italic' }}>Activity Type: </text> {location.activity_type}</p>
-        <p ><text style={{ fontWeight: 'bold', fontStyle: 'italic'}}>Description: </text>{location.description}</p>
-        <p ><text style={{ fontWeight: 'bold', fontStyle: 'italic'}}>Address: </text>{location.address}</p>
-        <p ><text style={{ fontWeight: 'bold', fontStyle: 'italic'}}>Neighborhood: </text>{location.neighborhood}</p>
+        <p style={{textAlign: 'center', fontSize: 'larger'}}><b><i>Activity Type:</i></b> {location.activity_type}</p>
+        <p><b><i>Description:</i></b> {location.description}</p>
+        <p><b><i>Address:</i></b> {location.address}</p>
+        <p><b><i>Neighborhood:</i></b> {location.neighborhood}</p>
       </div>
       <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
         {isFavorite 
@@ -175,10 +158,17 @@ function ActivityCard ({location, reviewLocationId, setReviewLocationId, ratingA
           <button className='favorite-button' onClick={handleVisitedClick}>Been There?</button>
         </div>}
       </div>
-      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-        <button className='review-button' style={{marginTop: '10px', }}onClick={handleAddReview}>
-          Write a Review
-        </button>
+      <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <button className='review-button' style={{marginTop: '10px', }}onClick={handleViewReviews}>
+            See All Reviews
+          </button>
+        </div>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+          <button className='review-button' style={{marginTop: '10px', }}onClick={handleAddReview}>
+            Write a Review
+          </button>
+        </div>
       </div>
     </div>
   )

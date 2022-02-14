@@ -24,7 +24,7 @@ function Login ({setSelectedCity}) {
     borderRadius: '5px'
   };
 
-  function handleCitySelect (event) {
+  function handleCitySelect () {
     history.push('/city')
   }
 
@@ -37,40 +37,6 @@ function Login ({setSelectedCity}) {
       <div><h1 className="act-card-section">Welcome, {currentUser.user_name}</h1></div>
       <div className='login-page'>
         <UserNavBar />
-        {/* <div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', marginTop: '3px', marginBottom: '3px'}}>
-        <NavLink 
-          to="/user"  
-          exact 
-          // style={loginLinkStyles} 
-          className='user-nav-bar'
-          activeStyle={{background: "#FB7498", color: 'black'}}
-          >User Home
-        </NavLink>
-        <NavLink 
-          to="/user/reviews" 
-          exact
-          // style={loginLinkStyles} 
-          className='user-nav-bar'
-          activeStyle={{background: "#FB7498", color: 'black'}}
-          >My Reviews
-        </NavLink>
-        <NavLink 
-          to="/user/favorites" 
-          exact
-          // style={loginLinkStyles}  
-          className='user-nav-bar'
-          activeStyle={{background: "#FB7498", color: 'black'}}
-          >My Favorites
-        </NavLink>
-        <NavLink 
-          to="/user/update" 
-          exact
-          // style={loginLinkStyles}  
-          className='user-nav-bar'
-          activeStyle={{background: "#FB7498", color: 'black'}}
-          >Update My Info
-        </NavLink>
-        </div> */}
         <div style={{display: 'flex', justifyContent: 'center'}}>
           {currentUser.reviews.length < 5 ? <h1 >Your community needs to hear your opinions!</h1> : null}
           {currentUser.reviews.length >= 5 && currentUser.reviews.length < 10 ? <h1>Thanks for being an active member in your community!</h1> : null}

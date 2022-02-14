@@ -5,9 +5,18 @@ import { UserContext } from './UserContext'
 
 function ViewFavorites ({reviewLocationId, setReviewLocationId}) {
 
+  useEffect (() => {
+    fetch(`http://localhost:9293/users/${currentUser.id}/favorites`)
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+      setFilteredFavorites(data)
+    })
+  }, [] )
+
   const {currentUser, setCurrentUser} = useContext(UserContext)
 
-  const [filteredFavorites, setFilteredFavorites] = useState(currentUser.favorites)
+  const [filteredFavorites, setFilteredFavorites] = useState([])
   const [favoritesHeader, setFavoritesHeader] = useState('All My Places')
 
   function handleSelectAllPlaces (event) {
@@ -44,8 +53,6 @@ function ViewFavorites ({reviewLocationId, setReviewLocationId}) {
       <div className='activity-card-container'>
         {filteredFavorites.map((userFavorite) => (
         <UserActivityCard 
-          currentUser={currentUser} 
-          setCurrentUser={setCurrentUser}
           userFavorite={userFavorite}
           key={userFavorite.id}
           filteredFavorites={filteredFavorites}

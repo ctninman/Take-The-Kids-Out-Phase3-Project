@@ -99,6 +99,7 @@ code {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-weight: bold;
   padding: "12px";
   margin: 0 12px 12px;
   background: #D95276;
@@ -119,6 +120,7 @@ code {
     justify-content: center;
     padding: "12px";
     margin: 0 6px 6px;
+    font-weight: bold;
     background: white;
     text-decoration: none;
     color: #022873;
@@ -239,6 +241,11 @@ input {
   margin-right: 10px;
 }
 
+button {
+  font-weight: bold;
+}
+
+
 .account-button {
   border-radius: 5px;
   /* font-family: 'Supermercado One', cursive; */
@@ -252,4 +259,31 @@ input {
 .rating {
   margin: 0px;
   padding: 0px;
+}
+
+select {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  font-family: 'Gideon Roman', cursive;
+  margin-left: 10px;
+}
+
+.return-button {
+  /* font-family: 'Supermercado One', cursive; */
+  font-family: 'Gideon Roman', cursive;
+  background-color: #04BF9D;
+  color: white;
+  width: 150px;
+  border-radius: 3px;
+  font-weight: bolder;
+  font-size: large;
+  height: 25px;
+  margin: 3px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+.single-review {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  font-family: 'Gideon Roman', cursive;
+  margin: 20px;
+  border-radius: 10px;
 }

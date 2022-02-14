@@ -1,70 +1,48 @@
-# Getting Started with Create React App
+# Take The Kids Out
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Sinatra/ActiveRecord - backend
 
-## Available Scripts
+React - frontend
 
-In the project directory, you can run:
+## Overview
 
-### `npm start`
+Users can explore various cities to search for activities they and their children are likely to enjoy. Searches may be based upon age-level, or whether a location is outdoor or free. Users can add locations to their city, and add reviews to each of those locations. All data persists and is accessible to users upon refresh. 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## User
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Login is not required to explore locations within a city, but various features are unlocked when a user is logged in. Login allows client to add an activity to a city, write a review for a location, and save and access locations as favorites, places to visit, or places they have visited. 
 
-### `npm test`
+## Cities
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Users may explore activities in any city in the database and filter the activities in a variety of methods, which include
 
-### `npm run build`
+### Free
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- A list of all free activities
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Outdoor
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- A list of all location that have outdoor activities
 
-### `npm run eject`
+### Highest-Rated for Babies
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- An ordered list of locations by the average score for children 0-12 months old
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Highest-Rated for Toddlers
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- An ordered list of locations by the average score for children 1-3 years old
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Highest-Rated for Preschoolers
 
-## Learn More
+- An ordered list of locations by the average score for children 3-5 years old
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Highest-Rated for School-Age Kids
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- An ordered list of locations by the average score for children 6-12 years old
 
-### Code Splitting
+### Highest-Rated for Adults
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+- An ordered list of locations by the average score for adults
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  

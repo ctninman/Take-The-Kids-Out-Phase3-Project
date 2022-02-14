@@ -9,6 +9,7 @@ function UpdateUser () {
   let history = useHistory()
   
   const [formUserName, setFormUserName] = useState(currentUser.user_name)
+  const [formUserEmail, setFormUserEmail] = useState(currentUser.email)
   const [formUserPassword, setFormUserPassword] = useState(currentUser.password)
   const [formUserCity, setFormUserCity] = useState(currentUser.city_id)
   // const [formUserKids, setFormUserKids] = useState(null)
@@ -24,6 +25,10 @@ function UpdateUser () {
 
   function onUserCityChange (event) {
     setFormUserCity(event.target.value)
+  }
+
+  function onUserEmailChange (event) {
+    setFormUserEmail(event.target.value)
   }
 
   // function onUserKidsChange (event) {
@@ -66,73 +71,102 @@ function UpdateUser () {
       :
     <div>
       <h1 className='act-card-section'>Update My Info</h1>
+     
       <div style={{display: 'flex', justifyContent: 'center', marginLeft: '10%', marginRight: '10%'}}>
-      <form 
-        className='activity-form'
-        style={{display: 'flex', flexDirection:'column', backgroundColor: 'orange', margin: '10px', padding: '20px'}}
-        id='create-user-form'
-        onSubmit={handleUserUpdate}>
-        <div>
-          <label>Update Name:</label>
-          <input 
-            name='newuser-name'
-            value={formUserName}
-            type='text' 
-            onChange={onUserNameChange}>
-          </input>
+        <div style={{width: '65%'}}>
+          <form 
+            className='activity-form'
+            style={{display: 'flex', flexDirection:'column', margin: '10px', padding: '20px'}}
+            id='create-user-form'
+            onSubmit={handleUserUpdate}>
+            
+            <div style={{display: 'flex', flexDirection: 'row', marginBottom: '8px'}}>
+              <div className='form-div' style={{width: '40%', textAlign: 'right'}}> 
+                <label>Update Name:</label>
+              </div>
+              <div style={{width: '65%'}}>
+                <input 
+                  style={{width: '90%'}}
+                  name='updateuser-name'
+                  value={formUserName}
+                  type='text' 
+                  onChange={onUserNameChange}>
+                </input>
+              </div>
+            </div>
+            
+            <div style={{display: 'flex', flexDirection: 'row', marginBottom: '8px'}}>
+              <div className='form-div' style={{width: '40%', textAlign: 'right'}}> 
+                <label>Update Password:</label>
+              </div>
+              <div style={{width: '65%'}}>
+                <input 
+                  style={{width: '90%'}}
+                  name='updateuser-password'
+                  value={formUserPassword}
+                  type='text' 
+                  onChange={onUserPasswordChange}>
+                </input>
+              </div>
+            </div>
+            
+            <div style={{display: 'flex', flexDirection: 'row', marginBottom: '8px'}}>
+              <div className='form-div' style={{width: '40%', textAlign: 'right'}}> 
+                <label>Update Email:</label>
+              </div>
+              <div style={{width: '65%'}}>
+                <input 
+                  style={{width: '90%'}}
+                  name='updateuser-password'
+                  value={formUserEmail}
+                  type='text' 
+                  onChange={onUserEmailChange}>
+                </input>
+              </div>
+            </div>
+          
+            <div style={{display: 'flex', flexDirection: 'row', marginBottom: '8px'}}>
+              <div className='form-div' style={{width: '40%', textAlign: 'right'}}> 
+                <label>Your City: </label>
+              </div>
+              <div style={{width: '65%'}}>
+                <select value={formUserCity} name={'cities-form'} id={'cities-form'} onChange={onUserCityChange}>
+                  <option value={null}>---</option>
+                  <option value={1}>New York City, NY</option>
+                  <option value={2}>San Francisco, CA</option>
+                  <option value={3}>Madison, WI</option>
+                </select>
+              </div>
+            </div>
+
+            <div style={{display: 'flex', flexDirection: 'row', marginBottom: '15px', marginTop: '10px'}}>
+              <div className='form-div' style={{width: '40%', textAlign: 'right'}}> 
+                <label>Update Photo:</label>
+              </div>
+              <div style={{width: '65%'}}>
+                <input 
+                  style={{width: '90%'}}
+                  name='updateuser_photo'
+                  value={formUserPhoto}
+                  type='text' 
+                  onChange={onUserPhotoChange}>
+                </input>
+              </div>
+            </div>
+    
+            <div style={{display: 'flex', justifyContent: 'center'}}>
+              <button
+                type='submit'
+                value="Enter"
+                style={{marginTop: '2px'}} 
+                id='update-user-button'
+                text='Enter'>
+                  Update My Info
+                </button>
+              </div>
+
+          </form>
         </div>
-        <div>
-        <label>Update Password:</label>
-          <input 
-            name='newuser-password'
-            value={formUserPassword}
-            type='text' 
-            onChange={onUserPasswordChange}>
-          </input>
-        </div>
-        <div>
-        <label>Your City</label>
-        <select value={formUserCity} name={'cities-form'} id={'cities-form'} onChange={onUserCityChange}>
-          <option value={null}>---</option>
-          <option value={1}>New York City, NY</option>
-          <option value={2}>San Francisco, CA</option>
-          <option value={3}>Madison, WI</option>
-        </select>
-        </div>
-        {/* <div>
-        <label>Number of Children</label>
-        <select name={'kids-form'} id={'kids-form'} onChange={onUserKidsChange}>
-          <option value={0}>0</option>
-          <option value={1}>1</option>
-          <option value={2}>2</option>
-          <option value={3}>3</option>
-          <option value={4}>4</option>
-          <option value={5}>5</option>
-          <option value={6}>6</option>
-          <option value={7}>7</option>
-          <option value={8}>8</option>
-          <option value={9}>9</option>
-          <option value={10}>10</option>
-        </select>
-        </div> */}
-        <div>
-        <label>Update Photo:</label>
-          <input 
-            name='newuser_photo'
-            value={formUserPhoto}
-            type='text' 
-            onChange={onUserPhotoChange}>
-          </input>
-        </div>
-        <button
-          type='submit'
-          value="Enter"
-          style={{marginTop: '2px'}} 
-          id='create-user-button'
-          text='Enter'>
-            Update My Info!
-          </button>
-      </form>
       </div>
     </div>
 }

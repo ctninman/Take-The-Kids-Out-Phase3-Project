@@ -11,11 +11,18 @@ function CreateReview ({reviewLocationId}) {
 
   const [reviewDescription, setReviewDescription] = useState('')
   const [reviewRating, setReviewRating] = useState({baby: null, adult: null, toddler: null, preschool: null, schoolage: null, overall: null})
-  // const [reviewUserCity, setReviewUserCity] = useState(null)
-  // const [reviewUserKids, setReviewUserKids] = useState(null)
-  // const [reviewUserPhoto, setReviewUserPhoto] = useState(false)
 
-  // let history = useHistory()
+  let nullValue = (
+    reviewRating.baby === null ||
+    reviewRating.toddler === null ||
+    reviewRating.preschool === null ||
+    reviewRating.schoolage === null ||
+    reviewRating.adult === null ||
+    reviewRating.overall === null) 
+      ?
+    true
+      :
+    false
 
   function onReviewDescriptionChange (event) {
     setReviewDescription(event.target.value)
@@ -28,18 +35,6 @@ function CreateReview ({reviewLocationId}) {
       [event.target.name]: event.target.value
     }))
   }
-
-  // function onUserCityChange (event) {
-  //   setReviewUserCity(event.target.value)
-  // }
-
-  // function onUserKidsChange (event) {
-  //   setReviewUserKids(event.target.value)
-  // }
-
-  // function onUserPhotoChange (event) {
-  //   setReviewUserPhoto(event.target.value)
-  // }
 
   function postNewReview (object) {  
     fetch(`http://localhost:9293/reviews`, {
@@ -58,20 +53,23 @@ function CreateReview ({reviewLocationId}) {
 
   function handleReviewSubmit(event) {
     event.preventDefault()
-    let newReview = {
-      location_id: reviewLocationId,
-      user_id: currentUser.id,
-      review: reviewDescription,
-      baby_rating: reviewRating.baby,
-      toddler_rating: reviewRating.toddler,
-      preschool_rating: reviewRating.preschool,
-      school_age_rating: reviewRating.schoolage,
-      adult_rating: reviewRating.adult,
-      general_rating: reviewRating.overall,
+    if (nullValue === true) {
+      alert("Please complete all sections.")
+    } else {
+      let newReview = {
+        location_id: reviewLocationId,
+        user_id: currentUser.id,
+        review: reviewDescription,
+        baby_rating: reviewRating.baby,
+        toddler_rating: reviewRating.toddler,
+        preschool_rating: reviewRating.preschool,
+        school_age_rating: reviewRating.schoolage,
+        adult_rating: reviewRating.adult,
+        general_rating: reviewRating.overall,
+      }
+      postNewReview(newReview)
+      history.goBack()
     }
-    console.log('newac', newReview)
-    postNewReview(newReview)
-    history.goBack()
   }
 
 
@@ -88,72 +86,112 @@ function CreateReview ({reviewLocationId}) {
         className='review-form'
         onSubmit={handleReviewSubmit}
         >
-        <input 
-          name='review-description'
-          type='text' 
-          value={reviewDescription}
-          placeholder='Enter Your Review'
-          onChange={onReviewDescriptionChange}
-          >
-        </input>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-          <label>Rating for Babies (0-12 Months)</label>
-          <input onClick={onRatingClick} name='baby' type='radio' value={1} /> 1
-          <input onClick={onRatingClick} name='baby' type='radio' value={2} /> 2
-          <input onClick={onRatingClick} name='baby' type='radio' value={3} /> 3
-          <input onClick={onRatingClick} name='baby' type='radio' value={4} /> 4
-          <input onClick={onRatingClick} name='baby' type='radio' value={5} /> 5
+
+        <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+          <div style={{width: '20%', textAlign: 'right'}}>
+            <label>Your Review:</label>
+          </div>
+          <div style={{marginLeft: '10px', borderRadius: '5px'}}>
+            <textarea rows="4" cols="60"
+              style={{fontFamily: 'Gideon Roman'}}
+              name='review-description'
+              type='text' 
+              value={reviewDescription}
+              placeholder='Enter Your Review'
+              onChange={onReviewDescriptionChange}
+              >
+            </textarea>
+          </div>
         </div>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-          <label>Rating for Toddlers (1-2 Years)</label>
-          <input onClick={onRatingClick} name='toddler' type='radio' value={1} /> 1
-          <input onClick={onRatingClick} name='toddler' type='radio' value={2} /> 2
-          <input onClick={onRatingClick} name='toddler' type='radio' value={3} /> 3
-          <input onClick={onRatingClick} name='toddler' type='radio' value={4} /> 4
-          <input onClick={onRatingClick} name='toddler' type='radio' value={5} /> 5
+  
+       <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+         <div style={{width: '40%', textAlign: 'right'}}>
+            <label>Rating for Babies (0-12 Months)</label>
+          </div>
+          <div style={{display: 'flex', width: '58%', flexDirection: 'row', justifyContent: 'right'}}>
+            <input onClick={onRatingClick} name='baby' type='radio' value={1} /> 1
+            <input onClick={onRatingClick} name='baby' type='radio' value={2} /> 2
+            <input onClick={onRatingClick} name='baby' type='radio' value={3} /> 3
+            <input onClick={onRatingClick} name='baby' type='radio' value={4} /> 4
+            <input onClick={onRatingClick} name='baby' type='radio' value={5} /> 5
+          </div>
         </div>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-          <label>Rating for Preschoolers (3-5 Years)</label>
-          <input onClick={onRatingClick} name='preschool' type='radio' value={1} /> 1
-          <input onClick={onRatingClick} name='preschool' type='radio' value={2} /> 2
-          <input onClick={onRatingClick} name='preschool' type='radio' value={3} /> 3
-          <input onClick={onRatingClick} name='preschool' type='radio' value={4} /> 4
-          <input onClick={onRatingClick} name='preschool' type='radio' value={5} /> 5
+       
+        <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+          <div style={{width: '40%', textAlign: 'right'}}>
+            <label>Rating for Toddlers (1-2 Years)</label>
+          </div>
+          <div style={{display: 'flex', width: '58%', flexDirection: 'row', justifyContent: 'right'}}>
+            <input onClick={onRatingClick} name='toddler' type='radio' value={1} /> 1
+            <input onClick={onRatingClick} name='toddler' type='radio' value={2} /> 2
+            <input onClick={onRatingClick} name='toddler' type='radio' value={3} /> 3
+            <input onClick={onRatingClick} name='toddler' type='radio' value={4} /> 4
+            <input onClick={onRatingClick} name='toddler' type='radio' value={5} /> 5
+          </div>
         </div>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-          <label>Rating for School-Age Children (6-12 Years)</label>
-          <input onClick={onRatingClick} name='schoolage' type='radio' value={1} /> 1
-          <input onClick={onRatingClick} name='schoolage' type='radio' value={2} /> 2
-          <input onClick={onRatingClick} name='schoolage' type='radio' value={3} /> 3
-          <input onClick={onRatingClick} name='schoolage' type='radio' value={4} /> 4
-          <input onClick={onRatingClick} name='schoolage' type='radio' value={5} /> 5
+       
+        <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+          <div style={{width: '40%', textAlign: 'right'}}>
+            <label>Rating for Preschoolers (3-5 Years)</label>
+          </div>
+          <div style={{display: 'flex', width: '58%', flexDirection: 'row', justifyContent: 'right'}}>
+            <input onClick={onRatingClick} name='preschool' type='radio' value={1} /> 1
+            <input onClick={onRatingClick} name='preschool' type='radio' value={2} /> 2
+            <input onClick={onRatingClick} name='preschool' type='radio' value={3} /> 3
+            <input onClick={onRatingClick} name='preschool' type='radio' value={4} /> 4
+            <input onClick={onRatingClick} name='preschool' type='radio' value={5} /> 5
+          </div>
         </div>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-          <label>Rating for Adults</label>
-          <input onClick={onRatingClick} name='adult' type='radio' value={1} /> 1
-          <input onClick={onRatingClick} name='adult' type='radio' value={2} /> 2
-          <input onClick={onRatingClick} name='adult' type='radio' value={3} /> 3
-          <input onClick={onRatingClick} name='adult' type='radio' value={4} /> 4
-          <input onClick={onRatingClick} name='adult' type='radio' value={5} /> 5
+       
+        <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+          <div style={{width: '40%', textAlign: 'right'}}>
+            <label>Rating for School-Age Children (6-12 Years)</label>
+          </div>
+          <div style={{display: 'flex', width: '58%', flexDirection: 'row', justifyContent: 'right'}}>
+            <input onClick={onRatingClick} name='schoolage' type='radio' value={1} /> 1
+            <input onClick={onRatingClick} name='schoolage' type='radio' value={2} /> 2
+            <input onClick={onRatingClick} name='schoolage' type='radio' value={3} /> 3
+            <input onClick={onRatingClick} name='schoolage' type='radio' value={4} /> 4
+            <input onClick={onRatingClick} name='schoolage' type='radio' value={5} /> 5
+          </div>
         </div>
-        <div style={{display: 'flex', flexDirection: 'row'}}>
-          <label>Overall Rating</label>
-          <input onClick={onRatingClick} name='overall' type='radio' value={1} /> 1
-          <input onClick={onRatingClick} name='overall' type='radio' value={2} /> 2
-          <input onClick={onRatingClick} name='overall' type='radio' value={3} /> 3
-          <input onClick={onRatingClick} name='overall' type='radio' value={4} /> 4
-          <input onClick={onRatingClick} name='overall' type='radio' value={5} /> 5
+        
+        <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+          <div style={{width: '40%', textAlign: 'right'}}>
+            <label>Rating for Adults:</label>
+          </div>
+          <div style={{display: 'flex', width: '58%', flexDirection: 'row', justifyContent: 'right'}}>
+            <input onClick={onRatingClick} name='adult' type='radio' value={1} /> 1
+            <input onClick={onRatingClick} name='adult' type='radio' value={2} /> 2
+            <input onClick={onRatingClick} name='adult' type='radio' value={3} /> 3
+            <input onClick={onRatingClick} name='adult' type='radio' value={4} /> 4
+            <input onClick={onRatingClick} name='adult' type='radio' value={5} /> 5
+          </div>
+        </div>
+       
+        <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+          <div style={{width: '40%', textAlign: 'right'}}>
+            <label>Overall Rating:</label>
+          </div>
+          <div style={{display: 'flex', width: '58%', flexDirection: 'row', justifyContent: 'right'}}>
+            <input onClick={onRatingClick} name='overall' type='radio' value={1} /> 1
+            <input onClick={onRatingClick} name='overall' type='radio' value={2} /> 2
+            <input onClick={onRatingClick} name='overall' type='radio' value={3} /> 3
+            <input onClick={onRatingClick} name='overall' type='radio' value={4} /> 4
+            <input onClick={onRatingClick} name='overall' type='radio' value={5} /> 5
+          </div>
         </div>
       
-
-        <button
-          type='submit'
-          value="Enter"
-          style={{marginTop: '2px'}} 
-          id='create-review-button'
-          text='Enter'>
-            Create Review!
+        <div style={{display: 'flex', justifyContent: 'center', marginTop: '10px'}}>
+          <button
+            type='submit'
+            value="Enter"
+            style={{marginTop: '2px'}} 
+            id='create-review-button'
+            text='Enter'>
+              Create Review!
           </button>
+        </div>
       </form>
     </div>
     </div>

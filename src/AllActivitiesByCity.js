@@ -2,14 +2,16 @@ import ActivityCard from "./ActivityCard"
 import CityNavBar from "./CityNavBar"
 import {useState, useEffect, useContext} from 'react'
 import { UserContext } from './UserContext'
+import AllReviewsOneLocation from "./AllReviewsOneLocation"
 
 function AllActivitiesByCity ({selectedCity, reviewLocationId, setReviewLocationId}) {
 
   const {currentUser, setCurrentUser} = useContext(UserContext)
+  const [viewAllLocationReviews, setViewAllLocationReviews] = useState(false)
   const [allLocations, setAllLocations] = useState([])
 
   useEffect (() => {
-    fetch(`http://localhost:9293//cities/${selectedCity.id}/locations`)
+    fetch(`http://localhost:9293/cities/${selectedCity.id}/locations`)
     .then(res => res.json())
     .then(data => {
       let sortedLocations = data.sort(data.average_general_rating)
@@ -17,7 +19,7 @@ function AllActivitiesByCity ({selectedCity, reviewLocationId, setReviewLocation
     })
   }, [] )
 
-  return(
+  return viewAllLocationReviews === false ?
     <div>
       <div>
       <h1 className="act-card-section">All Activities in {selectedCity.city_name}</h1>
@@ -26,6 +28,7 @@ function AllActivitiesByCity ({selectedCity, reviewLocationId, setReviewLocation
       <div className='activity-card-container'>
       {allLocations.map((location) => (
        <ActivityCard 
+        setViewLocationReviews={setViewAllLocationReviews}
         key={location.id}
         ratingAverage={location.average_general_rating}
         age="Overall Rating"
@@ -36,7 +39,17 @@ function AllActivitiesByCity ({selectedCity, reviewLocationId, setReviewLocation
      ))}
      </div>
     </div>
-  )
+      :
+    <>    
+      <div style={{marginTop: '10px', marginLeft: '10px'}}>
+        <button 
+          className='return-button' 
+          onClick={() => setViewAllLocationReviews(false)}>
+            Return to City
+        </button>
+      </div>
+      <AllReviewsOneLocation reviewLocationId={reviewLocationId}/>
+    </>
 }
 
 export default AllActivitiesByCity

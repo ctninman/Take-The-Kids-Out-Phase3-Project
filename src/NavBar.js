@@ -31,7 +31,7 @@ function NavBar() {
             exact
             // style={linkStyles}
             className='city-nav-bar'
-            activeStyle={{background: "#FB7498", color: 'black'}}
+            activeStyle={{background: "#FB7498"}}
           >
             Home
           </NavLink>
@@ -40,7 +40,7 @@ function NavBar() {
             exact
             // style={linkStyles}
             className='city-nav-bar'
-            activeStyle={{background: "#FB7498", color: 'black'}}
+            activeStyle={{background: "#FB7498"}}
           >
             My Info
           </NavLink>
@@ -49,7 +49,7 @@ function NavBar() {
             exact
             // style={linkStyles}
             className='city-nav-bar'
-            activeStyle={{background: "#FB7498", color: 'black'}}
+            activeStyle={{background: "#FB7498"}}
           >
             City
           </NavLink>

@@ -9,7 +9,7 @@ function CityNavBar () {
           exact 
           // style={cityLinkStyles} 
           className='city-nav-bar'
-          activeStyle={{background: "#FB7498", color: 'black'}}
+          activeStyle={{background: "#FB7498"}}
           >City Home
         </NavLink>
         <NavLink 
@@ -18,7 +18,7 @@ function CityNavBar () {
           // style={cityLinkStyles} 
           className='city-nav-bar'
 
-          activeStyle={{background: "#FB7498", color: 'black'}}
+          activeStyle={{background: "#FB7498"}}
           >All Activities
         </NavLink> 
         <NavLink 
@@ -26,7 +26,7 @@ function CityNavBar () {
           exact
           // style={cityLinkStyles} 
           className='city-nav-bar' 
-          activeStyle={{background: "#FB7498", color: 'black'}}
+          activeStyle={{background: "#FB7498"}}
           >Babies
         </NavLink>
         <NavLink 
@@ -34,7 +34,7 @@ function CityNavBar () {
           exact
           // style={cityLinkStyles} 
           className='city-nav-bar' 
-          activeStyle={{background: "#FB7498", color: 'black'}}
+          activeStyle={{background: "#FB7498"}}
           >Toddlers
         </NavLink>
         <NavLink 
@@ -42,7 +42,7 @@ function CityNavBar () {
           exact
           // style={cityLinkStyles} 
           className='city-nav-bar' 
-          activeStyle={{background: "#FB7498", color: 'black'}}
+          activeStyle={{background: "#FB7498"}}
           >Pre-K
         </NavLink>
         <NavLink 
@@ -50,7 +50,7 @@ function CityNavBar () {
           exact
           // style={cityLinkStyles} 
           className='city-nav-bar' 
-          activeStyle={{background: "#FB7498", color: 'black'}}
+          activeStyle={{background: "#FB7498"}}
           >School- Age
         </NavLink>
         <NavLink 
@@ -58,7 +58,7 @@ function CityNavBar () {
           exact
           // style={cityLinkStyles} 
           className='city-nav-bar'
-          activeStyle={{background: "#FB7498", color: 'black'}}
+          activeStyle={{background: "#FB7498"}}
           >Adults
         </NavLink>
         <NavLink 
@@ -66,7 +66,7 @@ function CityNavBar () {
           exact
           // style={cityLinkStyles} 
           className='city-nav-bar' 
-          activeStyle={{background: "#FB7498", color: 'black'}}
+          activeStyle={{background: "#FB7498"}}
           >Free
         </NavLink>
         <NavLink 
@@ -74,7 +74,7 @@ function CityNavBar () {
           exact
           // style={cityLinkStyles} 
           className='city-nav-bar' 
-          activeStyle={{background: "#FB7498", color: 'black'}}
+          activeStyle={{background: "#FB7498"}}
           >Outdoor
         </NavLink>
         <NavLink 
@@ -82,7 +82,7 @@ function CityNavBar () {
           exact
           // style={cityLinkStyles} 
           className='city-nav-bar'
-          activeStyle={{background: "#FB7498", color: 'black'}}
+          activeStyle={{background: "#FB7498"}}
           >Add Activity
         </NavLink>
     </div>
