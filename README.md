@@ -1,8 +1,10 @@
 # Take The Kids Out
 
-Sinatra/ActiveRecord - backend
+### Sinatra/ActiveRecord - backend 
 
-React - frontend
+<a href='https://github.com/ctninman/phase-3-sinatra-react-project'>Back-end Repo</a>
+
+### React - frontend
 
 ## Overview
 
