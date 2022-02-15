@@ -8,12 +8,25 @@ function UpdateUser () {
   
   let history = useHistory()
   
+    // *** STATE VARIABLES *** //
   const [formUserName, setFormUserName] = useState(currentUser.user_name)
   const [formUserEmail, setFormUserEmail] = useState(currentUser.email)
   const [formUserPassword, setFormUserPassword] = useState(currentUser.password)
   const [formUserCity, setFormUserCity] = useState(currentUser.city_id)
   const [formUserPhoto, setFormUserPhoto] = useState(currentUser.photo)
 
+    // *** FETCH REQUESTS *** //
+  function patchUpdatedUser (object) {  
+    fetch(`http://localhost:9293/users/${currentUser.id}`, {
+      method: "PATCH",
+      headers: {"Content-Type": "application/json",},
+      body: JSON.stringify(object),
+    })
+      .then((res) => res.json())
+      .then((data) => setCurrentUser(data))
+  }
+
+    // *** FUNCTIONS *** //
   function onUserNameChange (event) {
     setFormUserName(event.target.value)
   }
@@ -34,16 +47,6 @@ function UpdateUser () {
     setFormUserPhoto(event.target.value)
   }
 
-  function patchUpdatedUser (object) {  
-    fetch(`http://localhost:9293/users/${currentUser.id}`, {
-      method: "PATCH",
-      headers: {"Content-Type": "application/json",},
-      body: JSON.stringify(object),
-    })
-      .then((res) => res.json())
-      .then((data) => setCurrentUser(data))
-  }
-
   function handleUserUpdate(event) {
     event.preventDefault()
     let updatedUser = {
@@ -59,10 +62,27 @@ function UpdateUser () {
 
     // *** JSX *** //
   return currentUser === "" ?
-  <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
+  <>
+    <div style={{marginTop: '10px', marginLeft: '10px'}}>
+      <button 
+        className='return-button' 
+        onClick={() => history.goBack()}>
+          Back
+      </button>
+    </div>
+    <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
+  </>
       :
     <div>
       <h1 className='act-card-section'>Update My Info</h1>
+
+      <div style={{marginTop: '10px', marginLeft: '10px'}}>
+        <button 
+          className='return-button' 
+          onClick={() => history.goBack()}>
+            Nevermind
+        </button>
+      </div>
      
       <div style={{display: 'flex', justifyContent: 'center', marginLeft: '10%', marginRight: '10%'}}>
         <div style={{width: '65%'}}>

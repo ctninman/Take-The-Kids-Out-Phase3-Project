@@ -16,7 +16,6 @@ function CityNavBar () {
           to="/city/all" 
           exact
           className='city-nav-bar'
-
           activeStyle={{background: "#FB7498"}}
           >All Activities
         </NavLink> 

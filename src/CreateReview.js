@@ -9,6 +9,7 @@ function CreateReview ({reviewLocationId}) {
 
   let history = useHistory()
 
+    // *** STATE VARIABLES *** //
   const [reviewDescription, setReviewDescription] = useState('')
   const [reviewRating, setReviewRating] = useState({baby: null, adult: null, toddler: null, preschool: null, schoolage: null, overall: null})
 
@@ -24,18 +25,7 @@ function CreateReview ({reviewLocationId}) {
       :
     false
 
-  function onReviewDescriptionChange (event) {
-    setReviewDescription(event.target.value)
-  }
-
-  //passing callback into setReviewRating gets most up to date state
-  function onRatingClick (event) {
-    setReviewRating( (prevReviewRating) => ({
-      ...prevReviewRating, 
-      [event.target.name]: event.target.value
-    }))
-  }
-
+    // *** FETCH REQUESTS *** //
   function postNewReview (object) {  
     fetch(`http://localhost:9293/reviews`, {
       method: "POST",
@@ -46,8 +36,21 @@ function CreateReview ({reviewLocationId}) {
       .then ((data) => {
         let copyOfUser = {...currentUser}
         copyOfUser.reviews.push(data)
-        setCurrentUser(data.user)
+        setCurrentUser(copyOfUser)
       })
+  }
+
+    // *** FUNCTIONS *** //
+  function onReviewDescriptionChange (event) {
+    setReviewDescription(event.target.value)
+  }
+
+  //passing callback into setReviewRating gets most up to date state
+  function onRatingClick (event) {
+    setReviewRating( (prevReviewRating) => ({
+      ...prevReviewRating, 
+      [event.target.name]: event.target.value
+    }))
   }
 
   function handleReviewSubmit(event) {
@@ -73,10 +76,27 @@ function CreateReview ({reviewLocationId}) {
 
     // *** JSX *** //
   return (currentUser === '') ?
-    <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
+    <>
+      <div style={{marginTop: '10px', marginLeft: '10px'}}>
+        <button 
+          className='return-button' 
+          onClick={() => history.goBack()}>
+            Back
+        </button>
+      </div>
+      <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
+    </>
       :
     <div>
       <h1 className='act-card-section'>Create Review</h1>
+      <div style={{marginTop: '10px', marginLeft: '10px'}}>
+        <button 
+          className='return-button' 
+          onClick={() => history.goBack()}>
+            Return to City
+        </button>
+      </div>
+      
       <div style={{display: 'flex', justifyContent: 'center', marginLeft: '10%', marginRight: '10%'}}>
       <form 
         style={{display: 'flex', flexDirection:'column', margin: '10px', padding: '20px'}}

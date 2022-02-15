@@ -13,7 +13,7 @@ function NavBar() {
   return (
     <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#022873'}}> 
       
-        <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+        <div style={{flexGrow: '1', display: 'flex', flexDirection: 'row', marginTop: '10px', flexWrap: 'wrap'}}>
           <NavLink
             to='/'
             exact
@@ -40,14 +40,22 @@ function NavBar() {
           </NavLink>
         </div>
 
-        <div>
-          <h1 style={{fontSize: '50px', color: 'white', textShadow: '0px 0px 6px rgba(255,255,255,0.7)', margin: '0px'}}>Take The Kids Out</h1>
+        <div style={{display: 'flex', flexDirection: 'row', flexGrow: '1', flexWrap: 'wrap', justifyContent: 'center'}}>
+          <h1 
+            style={{fontSize: '50px', color: 'white', textAlign: 'center', textShadow: '0px 0px 6px rgba(255,255,255,0.7)', margin: '0px'}}
+            >Take The Kids Out
+          </h1>
         </div>
         
-        <div style={{display: 'flex', flexDirection: 'row', marginTop: '10px'}}>
+        <div style={{flexGrow: '1', display: 'flex', flexDirection: 'row', justifyContent: 'flex-end', marginTop: '10px', flexWrap: 'wrap'}}>
           <div style={{width: '75px'}}></div>
           <button className='login-button' onClick={() => history.push('/')}>Sign In</button>
-          <button className='login-button' onClick={() => setCurrentUser('')}>Sign Out</button>
+          <button className='login-button' 
+            onClick={() => {
+              setCurrentUser('')
+              history.push('/')}}
+            >Sign Out
+          </button>
         </div>
 
     </div>

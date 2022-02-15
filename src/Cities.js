@@ -4,12 +4,14 @@ import CityNavBar from './CityNavBar';
 
 function Cities ({selectedCity, setSelectedCity, cities}) {
 
+    // *** STATE VARIABLES *** //
   const [highestBabyRating, setHighestBabyRating] = useState ({})
   const [highestToddlerRating, setHighestToddlerRating] = useState ({})
   const [highestPreschoolRating, setHighestPreschoolRating] = useState ({})
   const [highestSchoolAgeRating, setHighestSchoolAgeRating] = useState ({})
   const [highestAdultRating, setHighestAdultRating] = useState ({})
 
+    // *** USE EFFECT *** //
   useEffect (() => {
     if (selectedCity != '') {
       fetch(`http://localhost:9293/cities/${selectedCity.id}/locations`)
@@ -44,9 +46,11 @@ function Cities ({selectedCity, setSelectedCity, cities}) {
         <h1 className="act-card-section">Welcome to {selectedCity.city_name}</h1>
         <CityNavBar />
         <div style={{display: 'flex', flexDirection: 'row'}}>
+          
           <div style={{width: '50%'}}>
             <img src={selectedCity.photo} alt={selectedCity.city_name} style={{width: '95%', marginLeft: '5%', marginRight: '5%', borderRadius: '10%'}}/>
           </div>
+          
           <div style={{width: '48%', padding: '15px'}}>
             <h1 style={{marginTop: '0px', paddingTop: '0px', textAlign: 'center'}}>Highest Rated Activity for...</h1>
             <h2><i>Babies:</i> {highestBabyRating.location_name}</h2>
@@ -55,6 +59,7 @@ function Cities ({selectedCity, setSelectedCity, cities}) {
             <h2><i>School-Age:</i> {highestSchoolAgeRating.location_name}</h2>
             <h2><i>Adults:</i> {highestAdultRating.location_name}</h2>
           </div>
+          
         </div>
       </div>
     </>

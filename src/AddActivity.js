@@ -10,6 +10,7 @@ function AddActivity ({selectedCity, setSelectedCity}) {
 
   let history = useHistory()
 
+    // *** STATE VARIABLES *** //
   const [formActivityName, setFormActivityName] = useState(null)
   const [formDescription, setFormDescription] = useState(null)
   const [formOutdoor, setFormOutdoor] = useState(false)
@@ -20,6 +21,22 @@ function AddActivity ({selectedCity, setSelectedCity}) {
   const [formNeighborhood, setFormNeighborhood] = useState(null)
   const [formType, setFormType] = useState(null)
 
+    // *** FETCH REQUESTS *** //
+  function postNewActivity (object) {  
+    fetch(`http://localhost:9293/locations`, {
+      method: "POST",
+      headers: {"Content-Type": "application/json",},
+      body: JSON.stringify(object),
+    })
+      .then((res) => res.json())
+      .then ((data) => {
+        let copyOfCity = {...selectedCity}
+        copyOfCity.locations.push(data)
+        setSelectedCity(copyOfCity)
+      })
+  }
+
+    // *** FUNCTIONS *** //
   function onActivityNameChange (event) {
     setFormActivityName(event.target.value)
   }
@@ -56,20 +73,6 @@ function AddActivity ({selectedCity, setSelectedCity}) {
     setFormType(event.target.value)
   }
 
-  function postNewActivity (object) {  
-    fetch(`http://localhost:9293/locations`, {
-      method: "POST",
-      headers: {"Content-Type": "application/json",},
-      body: JSON.stringify(object),
-    })
-      .then((res) => res.json())
-      .then ((data) => {
-        let copyOfCity = {...selectedCity}
-        copyOfCity.locations.push(data)
-        setSelectedCity(copyOfCity)
-      })
-  }
-
   function handleSubmit(event) {
     event.preventDefault()
     if (formActivityName === null || formDescription === null || formAddress === null || formNeighborhood === null || formType === null) {
@@ -92,21 +95,38 @@ function AddActivity ({selectedCity, setSelectedCity}) {
       history.push('/city/all')
     }
   }
-  
+
     // *** JSX *** //
   return (currentUser === '') ?
-  <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
+  <>
+    <div style={{marginTop: '10px', marginLeft: '10px'}}>
+      <button 
+        className='return-button' 
+        onClick={() => history.goBack()}>
+          Back
+      </button>
+    </div>
+    <h1 style={{textAlign: 'center'}}>You need to sign in to access this feature</h1>
+  </>
     :
   <>
     <div>
       <h1 className='act-card-section' >Add Activity to {selectedCity.city_name}</h1>
       <CityNavBar />
+      <div style={{marginTop: '10px', marginLeft: '10px'}}>
+        <button 
+          className='return-button' 
+          onClick={() => history.goBack()}>
+            Return to City
+        </button>
+      </div>
       <div style={{display: 'flex', justifyContent: 'center', marginLeft: '10%', marginRight: '10%'}}>
         <div style={{width: '80%'}}>
           <form 
             style={{display: 'flex', flexDirection:'column', margin: '10px', padding: '20px'}}
             className='activity-form'
             onSubmit={handleSubmit}>
+            
             <div style={{display: 'flex', flexDirection: 'row', marginBottom: '8px'}}>
               <div style={{width: '30%', height: '28px', textAlign: 'right'}}>
                 <label>Activity / Location: </label>
@@ -169,6 +189,7 @@ function AddActivity ({selectedCity, setSelectedCity}) {
               Outdoor activities?
               </label>
             </div>
+           
             <div style={{marginLeft: '30%'}}>
               <label>
               <input
@@ -178,6 +199,7 @@ function AddActivity ({selectedCity, setSelectedCity}) {
               Indoor activities?
               </label>
             </div>
+            
             <div style={{marginLeft: '30%'}}>
               <label>
               <input
@@ -218,7 +240,7 @@ function AddActivity ({selectedCity, setSelectedCity}) {
               :
             null}
            
-           <div style={{display: 'flex', flexDirection: 'row', marginBottom: '8px'}}>
+            <div style={{display: 'flex', flexDirection: 'row', marginBottom: '8px'}}>
               <div className='form-div' style={{width: '30%', textAlign: 'right'}}> 
                 <label>Neighborhood</label>
               </div>
@@ -230,6 +252,7 @@ function AddActivity ({selectedCity, setSelectedCity}) {
                 </input>
               </div>
             </div>
+            
             <div>
               <div style={{marginLeft: '30%'}}>
                 <button
@@ -242,6 +265,7 @@ function AddActivity ({selectedCity, setSelectedCity}) {
                 </button>
               </div>
             </div>
+
           </form>
         </div>
       </div>

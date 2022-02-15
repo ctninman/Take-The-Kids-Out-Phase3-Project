@@ -8,6 +8,7 @@ function UserActivityCard ({userFavorite, setFilteredFavorites, setReviewLocatio
 
   let history = useHistory()
 
+    // *** STATE VARIABLES *** //
   const [userActCardIsFavorite, setUserActCardIsFavorite] = useState((userFavorite.favorite === undefined || userFavorite.favorite === null) ? false : userFavorite.favorite)
   const [userActCardToVisit, setUserActCardToVisit] = useState((userFavorite.want_to_visit === undefined || userFavorite.want_to_visit === null) ? false : userFavorite.want_to_visit)
   const [userActCardWasVisited, setUserActCardWasVisited] = useState((userFavorite.visited === undefined || userFavorite.visited === null) ? false : userFavorite.visited)
@@ -16,10 +17,13 @@ function UserActivityCard ({userFavorite, setFilteredFavorites, setReviewLocatio
 
   const firstUpdate = useRef(true);
 
+    // *** USE EFFECT *** //
   useEffect(() => {
+    // *** causes rest of hook not to run on first render *** //
     if (firstUpdate.current) {
       firstUpdate.current = false;
       return
+    // *** ______________ //
     } else if (userActCardToVisit === false && userActCardWasVisited === false && userActCardIsFavorite ===false) {
       deleteUserFavorite(userFavorite.id)
       setVisible(false)
@@ -33,6 +37,7 @@ function UserActivityCard ({userFavorite, setFilteredFavorites, setReviewLocatio
     }
   }, [userActCardWasVisited, userActCardToVisit, userActCardIsFavorite]) 
 
+    // *** FETCH REQUESTS *** //
   function deleteUserFavorite (id) {
     fetch(`http://localhost:9293/favorites/${id}`, {
       method: "DELETE",
@@ -59,6 +64,7 @@ function UserActivityCard ({userFavorite, setFilteredFavorites, setReviewLocatio
       })
   }
 
+    // *** FUNCTIONS *** //
   function handleClickFavorites () {
     setUserActCardIsFavorite(!userActCardIsFavorite)
   }
@@ -81,20 +87,23 @@ function UserActivityCard ({userFavorite, setFilteredFavorites, setReviewLocatio
     <div className="activity-card">
       <h1 className="act-card-header" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{userFavorite.location.location_name}</h1>
       <img src={userFavorite.location.photo} alt={userFavorite.location.location_name} className='activity-photo'/>
+      
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         {userFavorite.location.outdoor === true ? <text className='emoji'>🌳</text> : null}
         {userFavorite.location.indoor === true ? <text className='emoji'>🏢</text> : null}
-        {userFavorite.location.free === true ? <text className='emoji'>🆓</text> : null}
-        
+        {userFavorite.location.free === true ? <text className='emoji'>🆓</text> : null}  
       </div>
+      
       <div style={{backgroundColor: 'white', borderRadius: '10%', marginTop: '3px', height: '250px', padding: '5px', border: '2px solid #022873'}}>
         <p style={{textAlign: 'center', fontSize: 'larger'}}><text style={{ fontWeight: 'bold', fontStyle: 'italic' }}>Activity Type: </text> {userFavorite.location.activity_type}</p>
-        <p ><text style={{ fontWeight: 'bold', fontStyle: 'italic'}}>Description: </text>{userFavorite.location.description}</p>
-        <p ><text style={{ fontWeight: 'bold', fontStyle: 'italic'}}>Address: </text>{userFavorite.location.address}</p>
-        <p ><text style={{ fontWeight: 'bold', fontStyle: 'italic'}}>Neighborhood: </text>{userFavorite.location.neighborhood}</p>
+        <p ><b><i>Description: </i></b> {userFavorite.location.description}</p>
+        <p ><b><i>Address: </i></b> {userFavorite.location.address}</p>
+        <p ><b><i>Neighborhood: </i></b> {userFavorite.location.neighborhood}</p>
         <p></p>
       </div>
+      
       <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+        
         {userActCardIsFavorite 
           ? 
         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
@@ -104,6 +113,7 @@ function UserActivityCard ({userFavorite, setFilteredFavorites, setReviewLocatio
         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>  
           <button className='favorite-button' onClick={handleClickFavorites}>Add to Favorites</button>
         </div>}
+        
         {userActCardToVisit
           ?
         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
@@ -113,6 +123,7 @@ function UserActivityCard ({userFavorite, setFilteredFavorites, setReviewLocatio
         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}> 
           <button className='favorite-button' onClick={handleClickToVisit}>Want To Go?</button>
         </div>}
+        
         {userActCardWasVisited
           ?
         <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}> 
@@ -123,6 +134,7 @@ function UserActivityCard ({userFavorite, setFilteredFavorites, setReviewLocatio
           <button className='favorite-button' onClick={handleClickVisited}>Been There?</button>
         </div>}
       </div>
+      
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         <button className='review-button' style={{marginTop: '10px', }}onClick={handleClickAddReview}>
           Write a Review
@@ -130,7 +142,7 @@ function UserActivityCard ({userFavorite, setFilteredFavorites, setReviewLocatio
       </div>
     </div>
      : 
-       null
+    null
 }
 // 
 

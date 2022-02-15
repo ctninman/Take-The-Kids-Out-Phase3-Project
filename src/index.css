@@ -116,7 +116,7 @@ code {
     font-family: 'Gideon Roman', cursive;
     display: flex;
     align-items: center;
-    justify-content: center;
+    /* justify-content: center; */
     padding: "12px";
     margin: 0 6px 6px;
     font-weight: bold;
@@ -259,7 +259,8 @@ button {
   margin: 2px;
   padding: 0px;
   font-weight: bold;
-  width: 150px
+  font-size: 20px;
+  width: 210px
 }
 
 select {

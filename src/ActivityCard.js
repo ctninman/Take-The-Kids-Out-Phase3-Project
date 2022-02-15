@@ -3,25 +3,26 @@ import {useHistory} from 'react-router'
 import { UserContext } from './UserContext'
 
 function ActivityCard ({location, setReviewLocationId, ratingAverage, age, setViewLocationReviews}) {
-
+  
+  const firstUpdate = useRef(true);
   const {currentUser, setCurrentUser} = useContext(UserContext)
-
+  let history = useHistory()
   let verifiedUser = (currentUser != '') ? currentUser.favorites.find((favorite) => favorite.location_id === location.id) : null
  
+    // *** STATE VARIABLES *** //
   const [isFavorite, setIsFavorite] = useState((verifiedUser === null || verifiedUser === undefined) ? false : verifiedUser.favorite)
   const [toVisit, setToVisit] = useState((verifiedUser === null || verifiedUser === undefined) ? false : verifiedUser.want_to_visit)
   const [wasVisited, setWasVisited] = useState((verifiedUser === null || verifiedUser === undefined) ? false : verifiedUser.visited)
 
-  let history = useHistory()
-
-  const firstUpdate = useRef(true);
-
+    // *** USE EFFECT *** //
   useEffect(() => {
+    // *** causes rest of hook not to run on first render *** //
     if (firstUpdate.current) {
       firstUpdate.current = false;
       return;
     }
-    if (currentUser === '') { return }
+    // *** ______ *** //
+    if (currentUser === '') { return } // *** stop running hook if user not logged in
     let foundFavorite = currentUser.favorites.find((favorite) => {
       return favorite.location_id === location.id
     })
@@ -46,6 +47,7 @@ function ActivityCard ({location, setReviewLocationId, ratingAverage, age, setVi
     }
   }, [isFavorite, toVisit, wasVisited])
 
+    // *** FETCH REQUESTS *** //
   function postUserFavorite (object) {  
     fetch(`http://localhost:9293/favorites`, {
       method: "POST",
@@ -62,9 +64,7 @@ function ActivityCard ({location, setReviewLocationId, ratingAverage, age, setVi
       headers: {"Content-Type": "application/json",},
       body: JSON.stringify(object),
     })
-      .then((res) => {
-        return res.json()
-      })
+      .then((res) => res.json())
       .then((data) => setCurrentUser(data.user))
   }
 
@@ -72,10 +72,11 @@ function ActivityCard ({location, setReviewLocationId, ratingAverage, age, setVi
     fetch(`http://localhost:9293/favorites/${id}`, {
       method: "DELETE",
     })
-    .then((r) => r.json())
+    .then((res) => res.json())
     .then((data) => setCurrentUser(data.user))
   }
 
+    // *** FUNCTIONS *** //
   function handleFavoriteClick () {
     if (verifiedUser === null) {
       alert('You need to be signed in to access this feature')
@@ -116,7 +117,7 @@ function ActivityCard ({location, setReviewLocationId, ratingAverage, age, setVi
       <h1 className="act-card-header" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{location.location_name}</h1>
       {age === null ?
         null :
-      <h2 className="act-card-rating" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{ratingAverage === 0 ? "No Ratings" : `${age}: ${ratingAverage.toFixed(1)} / 5`}</h2>}
+      <h3 className="act-card-rating" style={{backgroundColor: "white", textAlign: 'center', borderRadius: '5px'}}>{ratingAverage === 0 ? "No Ratings" : `${age}: ${ratingAverage.toFixed(1)} / 5`}</h3>}
       <img src={location.photo} alt={location.location_name} className='activity-photo'/>
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         {location.outdoor === true ? <span className='emoji'>🌳</span> : null}

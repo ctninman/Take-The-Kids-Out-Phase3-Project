@@ -5,11 +5,13 @@ function ReviewCard ({review}) {
 
   const {currentUser, setCurrentUser} = useContext(UserContext)
 
+    // *** STATE VARIABLES *** //
   const [reviewIsVisible, setReviewIsVisible] = useState(true)
   const [toggleCheckDelete, setToggleCheckDelete] = useState(false)
 
   const firstUpdate = useRef(true);
 
+    // *** USE EFFECT *** //
   useEffect(() => {
     if (firstUpdate.current) {
       firstUpdate.current = false;
@@ -18,6 +20,7 @@ function ReviewCard ({review}) {
     setReviewIsVisible(false)
   }}, [toggleCheckDelete])
   
+    // *** FETCH REQUESTS *** //
   function handleReviewDelete() {
     fetch(`http://localhost:9293/reviews/${review.id}`, {
       method: "DELETE",
@@ -31,7 +34,7 @@ function ReviewCard ({review}) {
       setToggleCheckDelete(!toggleCheckDelete)
     })
   }
-  
+
     // *** JSX *** //
   return reviewIsVisible 
       ?

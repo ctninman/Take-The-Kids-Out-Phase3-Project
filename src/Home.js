@@ -6,8 +6,10 @@ import { UserContext } from './UserContext'
 function Home ({cities, selectedCity, setSelectedCity, setLogin, setPassword, enterUserName}) {
   
   const {currentUser} = useContext(UserContext)
+  
   let history = useHistory()
 
+    // *** FUNCTIONS *** //
   function handleLoginType (event) {
     setLogin(event.target.value)
   }
@@ -19,7 +21,7 @@ function Home ({cities, selectedCity, setSelectedCity, setLogin, setPassword, en
   function beginAccountCreate () {
     history.push('/user/create')
   }
-  
+
     // *** JSX *** //
   return currentUser === '' 
     ?
@@ -29,7 +31,9 @@ function Home ({cities, selectedCity, setSelectedCity, setLogin, setPassword, en
         <form 
         onSubmit={enterUserName}
         id='username-form'>
-        <label style={{fontSize: '20px'}}>Login:</label><input 
+        
+        <label style={{fontSize: '20px'}}>Login:</label>
+        <input 
           style={{marginTop: '8px', fontSize: 'large'}} 
           name='username_input'
           type='text'
@@ -52,11 +56,13 @@ function Home ({cities, selectedCity, setSelectedCity, setLogin, setPassword, en
           text='Enter'
           >
             Enter
-          </button>
+        </button>
+
         </form>
       </div>
+
       <div div style={{display: 'flex', flexDirection: 'row', flexWrap: 'wrap', justifyContent:'center', marginTop: '3px', marginBottom: '3px'}}>
-      <button
+        <button
           type='button'
           value="create_account"
           className='account-button'
@@ -67,21 +73,23 @@ function Home ({cities, selectedCity, setSelectedCity, setLogin, setPassword, en
             Create Account
           </button>
       </div>
+      
       <div style={{display: 'flex', flexDirection: 'column', textAlign: 'center'}}>
-        
         <h2 style={{fontSize: '30px', margin: '3px'}}>Create/Login to Your Account to:</h2>
         <p style={{fontSize: '22px', margin: '3px'}}>  -Save and Access Your Favorite Activities</p> 
-          <p style={{fontSize: '22px', margin: '3px'}}>  -Create New Locations</p>
-          <p style={{fontSize: '22px', margin: '3px'}}>  -Write Reviews to Help Other Families</p>
+        <p style={{fontSize: '22px', margin: '3px'}}>  -Create New Locations</p>
+        <p style={{fontSize: '22px', margin: '3px'}}>  -Write Reviews to Help Other Families</p>
       </div>
+      
       <h1 style={{textAlign: 'center', fontSize: '40px'}}>Select a city:</h1>
+      
       <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
         {cities.map ((city) => (
-        <CityCard
-          key={city.id} 
-          city={city}
-          selectedCity={selectedCity}
-          setSelectedCity={setSelectedCity}/>
+          <CityCard
+            key={city.id} 
+            city={city}
+            selectedCity={selectedCity}
+            setSelectedCity={setSelectedCity}/>
         ))}
       </div>
     </div>
@@ -89,7 +97,7 @@ function Home ({cities, selectedCity, setSelectedCity, setLogin, setPassword, en
     <div>
       <h1 style={{textAlign: 'center', fontSize: '40px'}}>Hi, {currentUser.user_name}</h1>
       <h2 style={{textAlign: 'center', fontSize: '32px'}}>Where would you like to explore today?</h2>
-      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+      <div style={{display: 'flex', flexDirection: 'row', justifyContent: 'center', flexWrap: 'wrap'}}>
         {cities.map ((city) => (
           <CityCard
             key={city.id} 

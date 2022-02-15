@@ -5,6 +5,13 @@ import { UserContext } from './UserContext'
 
 function ViewFavorites ({reviewLocationId, setReviewLocationId}) {
 
+  const {currentUser} = useContext(UserContext)
+
+    // *** STATE VARIABLES *** //
+  const [filteredFavorites, setFilteredFavorites] = useState([])
+  const [favoritesHeader, setFavoritesHeader] = useState('All My Places')
+
+    // *** USE EFFECT *** //
   useEffect (() => {
     fetch(`http://localhost:9293/users/${currentUser.id}/favorites`)
     .then(res => res.json())
@@ -13,11 +20,7 @@ function ViewFavorites ({reviewLocationId, setReviewLocationId}) {
     })
   }, [] )
 
-  const {currentUser} = useContext(UserContext)
-
-  const [filteredFavorites, setFilteredFavorites] = useState([])
-  const [favoritesHeader, setFavoritesHeader] = useState('All My Places')
-
+    // *** FUNCTIONS *** //
   function handleSelectAllPlaces (event) {
     setFilteredFavorites(currentUser.favorites)
     setFavoritesHeader(event.target.value)

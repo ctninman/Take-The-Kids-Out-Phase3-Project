@@ -5,9 +5,11 @@ import CityNavBar from './CityNavBar'
 
 function AdultActivities ({selectedCity, reviewLocationId, setReviewLocationId}) {
   
+    // *** STATE VARIABLES *** //
   const [adultActivities, setAdultActivities] = useState([])
   const [viewAdultLocationReviews, setViewAdultLocationReviews] = useState(false)
 
+    // *** USE EFFECT *** //
   useEffect (() => {
     fetch(`http://localhost:9293/cities/${selectedCity.id}/locations/adult`)
     .then(res => res.json())
@@ -16,24 +18,24 @@ function AdultActivities ({selectedCity, reviewLocationId, setReviewLocationId})
       setAdultActivities(sortedActivities.reverse())
     })
   }, [] )
-  
+
     // *** JSX *** //
   return viewAdultLocationReviews === false ?
     <div>
       <h1 className="act-card-section">Also Enjoyable For Adults in {selectedCity.city_name}</h1>
       <CityNavBar />
       <div className='activity-card-container'>
-      {adultActivities.map((location) => (
-       <ActivityCard
-        setViewLocationReviews={setViewAdultLocationReviews} 
-        key={location.id}
-        ratingAverage={location.average_adult_rating}
-        age="Adult Rating" 
-        location={location}
-        reviewLocationId={reviewLocationId}
-        setReviewLocationId={setReviewLocationId}/>
-     ))}
-     </div>
+        {adultActivities.map((location) => (
+          <ActivityCard
+            setViewLocationReviews={setViewAdultLocationReviews} 
+            key={location.id}
+            ratingAverage={location.average_adult_rating}
+            age="Adult Rating" 
+            location={location}
+            reviewLocationId={reviewLocationId}
+            setReviewLocationId={setReviewLocationId}/>
+        ))}
+      </div>
     </div>
       :
     <>  
